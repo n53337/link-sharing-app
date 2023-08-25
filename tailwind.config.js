@@ -14,6 +14,9 @@ export default {
         white: "#FFFFFF",
         error: "#FF3939",
       },
+      boxShadow: {
+        btn: "0px 0px 32px 0px rgba(99, 60, 255, 0.25)",
+      },
     },
   },
   plugins: [],
