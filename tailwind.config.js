@@ -12,7 +12,7 @@ export default {
         "grey-10": "#D9D9D9",
         "grey-light": "#FAFAFA",
         white: "#FFFFFF",
-        red: "#FF3939",
+        error: "#FF3939",
       },
     },
   },
