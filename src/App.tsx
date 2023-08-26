@@ -12,6 +12,7 @@ import DropDown, { DropDownItems } from "@/ui/DropDown";
 import { useEffect, useState } from "react";
 import Tabs, { TabsItems } from "@/ui/Tabs";
 import LinksMenuList from "@/components/shared/LinksMenuList";
+import LinksPreviewList from "@/components/shared/LinksPreviewList";
 
 function App() {
   const dropItems: Array<DropDownItems> = [
@@ -97,6 +98,13 @@ function App() {
           setSelectedItem={setSelectedItem}
           tabsItems={tabsItems}
         />
+      </div>
+      <p className="my-8">Links</p>
+      <div className="mt-8 flex flex-col gap-4">
+        {LinksMenuList.map((e) => (
+          // <p>{e.bgColor}</p>
+          <LinksPreviewList item={e} to="/" />
+        ))}
       </div>
     </div>
   );
