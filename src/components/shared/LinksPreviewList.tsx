@@ -10,7 +10,7 @@ interface LinksPreviewListProps extends ComponentProps<"button"> {
 const LinksPreviewList = ({ item }: LinksPreviewListProps) => {
   return (
     <button
-      className={`w-full lg:max-w-lg rounded-lg flex items-center justify-between gap-2 px-6 py-4 border hover:opacity-80 transition duration-300 ease-in-out`}
+      className={`w-full lg:max-w-xs rounded-lg flex items-center justify-between gap-2 px-6 py-4 border hover:opacity-80 transition duration-300 ease-in-out`}
       style={{
         backgroundColor: `${item.bgColor}`,
         borderColor: item.border ? `${item.border}` : "none",
