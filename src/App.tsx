@@ -1,6 +1,13 @@
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";
-import { ArrowEmailForward, GitHub, Link, RemoveLink } from "iconoir-react";
+import {
+  ArrowEmailForward,
+  Facebook,
+  GitHub,
+  Link,
+  LinkedIn,
+  RemoveLink,
+} from "iconoir-react";
 import DropDown, { DropDownItems } from "@/ui/DropDown";
 import { useEffect, useState } from "react";
 
@@ -13,13 +20,13 @@ function App() {
     },
     {
       id: 2,
-      icon: <GitHub />,
-      item: "github",
+      icon: <LinkedIn />,
+      item: "linkedin",
     },
     {
       id: 3,
-      icon: <GitHub />,
-      item: "github",
+      icon: <Facebook />,
+      item: "facebook",
     },
   ];
 
@@ -61,6 +68,7 @@ function App() {
       <div className="mt-8 flex gap-4 flex-wrap">
         <DropDown
           // disabled={true}
+          placeHolder="Dropdown Field Active"
           icon={<RemoveLink />}
           dropDownItems={dropItems}
           selectedItem={selectedItem}

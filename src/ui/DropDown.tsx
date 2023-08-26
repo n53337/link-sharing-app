@@ -11,6 +11,7 @@ export interface DropDownItems {
 interface DropDownProps extends ComponentProps<"div"> {
   icon?: ReactElement;
   disabled?: boolean;
+  placeHolder: String;
   dropDownItems: Array<DropDownItems>;
   selectedItem: Number | null;
   setSelectedItem: any;
@@ -19,6 +20,7 @@ interface DropDownProps extends ComponentProps<"div"> {
 export default function DropDown({
   icon,
   disabled,
+  placeHolder,
   dropDownItems,
   selectedItem,
   setSelectedItem,
@@ -51,8 +53,19 @@ export default function DropDown({
         className={dropDownStyles}
         onClick={!disabled ? () => setIsOpen(!isOpen) : () => {}}
       >
-        {icon ? <span className="absolute top-4 left-4">{icon}</span> : null}
-        <p>Dropdown Field Active</p>
+        {selectedItem ? (
+          <span className="absolute top-4 left-4">
+            {dropDownItems.find((e) => e.id == selectedItem)?.icon}
+          </span>
+        ) : (
+          <span className="absolute top-4 left-4">{icon}</span>
+        )}
+        {/* {icon ? <span className="absolute top-4 left-4">{icon}</span> : null} */}
+        {!selectedItem ? (
+          <p>{placeHolder}</p>
+        ) : (
+          <p>{dropDownItems.find((e) => e.id == selectedItem)?.item}</p>
+        )}
         {isOpen ? (
           <NavArrowUp {...dropDownNavIconProps} />
         ) : (
@@ -65,7 +78,10 @@ export default function DropDown({
             <div
               key={item.id}
               className="flex items-center gap-1 p-3 cursor-pointer hover:bg-purple-10 transition duration-300 ease-in-out"
-              onClick={() => setSelectedItem(item.id)}
+              onClick={() => {
+                setSelectedItem(item.id);
+                setIsOpen(false);
+              }}
             >
               {item.icon}
               <p
