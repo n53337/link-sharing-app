@@ -6,6 +6,9 @@ export interface DropDownItems {
   id: Key;
   icon: ReactElement;
   item: String;
+  bgColor?: String;
+  arrowColor?: String;
+  border?: String;
 }
 
 interface DropDownProps extends ComponentProps<"div"> {
