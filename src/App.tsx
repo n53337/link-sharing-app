@@ -10,6 +10,7 @@ import {
 } from "iconoir-react";
 import DropDown, { DropDownItems } from "@/ui/DropDown";
 import { useEffect, useState } from "react";
+import Tabs, { TabsItems } from "@/ui/Tabs";
 
 function App() {
   const dropItems: Array<DropDownItems> = [
@@ -30,7 +31,20 @@ function App() {
     },
   ];
 
-  const [selectedItem, setSelectedItem] = useState<Number | null>(null);
+  const tabsItems: Array<TabsItems> = [
+    {
+      id: 1,
+      icon: <GitHub />,
+      item: "github",
+    },
+    {
+      id: 2,
+      icon: <LinkedIn />,
+      item: "linkedin",
+    },
+  ];
+
+  const [selectedItem, setSelectedItem] = useState(1);
 
   useEffect(() => {
     console.log("selected items: ", selectedItem);
@@ -73,6 +87,14 @@ function App() {
           dropDownItems={dropItems}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
+        />
+      </div>
+      <p className="my-8">Tabs</p>
+      <div className="mt-8 flex gap-4 flex-wrap">
+        <Tabs
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          tabsItems={tabsItems}
         />
       </div>
     </div>
