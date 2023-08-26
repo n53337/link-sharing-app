@@ -1,7 +1,13 @@
 import brandLogo from "@/assets/brand/full_logo.svg";
 import LoginForm from "@/components/login/LoginForm";
+import { BRAND_NAME } from "@/helpers/constants";
+import { useEffect } from "react";
 
 function Login() {
+  useEffect(() => {
+    document.title = `Login - ${BRAND_NAME}`;
+  }, []);
+
   return (
     <main className="min-w-screen min-h-screen p-8 bg-white md:bg-grey-light flex flex-col md:justify-center">
       <div className="w-full mb-8">
