@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+*,
+::placeholder {
   font-family: "Instrument Sans", sans-serif;
 }

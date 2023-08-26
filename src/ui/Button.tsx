@@ -9,12 +9,12 @@ interface ButtonProps extends ComponentProps<"button"> {
 const Button = ({ variant, active, ...rest }: ButtonProps) => {
   // Button Base Styles
   const buttonStyles = clsx({
-    "px-16 py-3.5 w-full rounded-lg font-semibold text-white transition duration-300 ease-in-out":
+    "px-16 py-3 w-full rounded-lg font-semibold transition duration-300 ease-in-out":
       true,
-    "bg-purple border-2 border-transparent hover:bg-purple-50 hover:shadow-btn":
+    "bg-purple border border-transparent text-white hover:bg-purple-50 hover:shadow-btn":
       variant == "primary",
     "bg-purple opacity-25 cursor-not-allowed": rest.disabled,
-    "border-2 border-purple bg-transparent text-purple hover:bg-purple-10":
+    "border border-purple bg-transparent text-purple hover:bg-purple-10":
       variant == "secondary",
   });
 
