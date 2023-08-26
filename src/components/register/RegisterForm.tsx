@@ -34,6 +34,9 @@ function RegisterForm() {
           placeholder="Enter your password"
         />
       </div>
+      <p className="text-grey-50 text-sm">
+        Password must contain at least 8 characters
+      </p>
       <Button variant="primary">Create new account</Button>
       <div className="flex flex-col md:flex-row justify-center items-center gap-1">
         <p className="text-grey-50 text-base">Already have an account?</p>
