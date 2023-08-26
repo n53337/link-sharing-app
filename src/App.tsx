@@ -11,7 +11,9 @@ import {
 import DropDown, { DropDownItems } from "@/ui/DropDown";
 import { useEffect, useState } from "react";
 import Tabs, { TabsItems } from "@/ui/Tabs";
-import LinksMenuList from "@/components/shared/LinksMenuList";
+import LinksMenuList, {
+  LinksMenuListGrey,
+} from "@/components/shared/LinksMenuList";
 import LinksPreviewList from "@/components/shared/LinksPreviewList";
 
 function App() {
@@ -86,7 +88,7 @@ function App() {
           // disabled={true}
           placeHolder="Dropdown Field Active"
           icon={<RemoveLink />}
-          dropDownItems={LinksMenuList}
+          dropDownItems={LinksMenuListGrey}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
         />
