@@ -1,8 +1,34 @@
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";
-import { ArrowEmailForward, Link, PhoneAdd } from "iconoir-react";
+import { ArrowEmailForward, GitHub, Link, RemoveLink } from "iconoir-react";
+import DropDown, { DropDownItems } from "@/ui/DropDown";
+import { useEffect, useState } from "react";
 
 function App() {
+  const dropItems: Array<DropDownItems> = [
+    {
+      id: 1,
+      icon: <GitHub />,
+      item: "github",
+    },
+    {
+      id: 2,
+      icon: <GitHub />,
+      item: "github",
+    },
+    {
+      id: 3,
+      icon: <GitHub />,
+      item: "github",
+    },
+  ];
+
+  const [selectedItem, setSelectedItem] = useState<Number | null>(null);
+
+  useEffect(() => {
+    console.log("selected items: ", selectedItem);
+  }, [selectedItem]);
+
   return (
     <div className="m-12">
       <p>Buttons</p>
@@ -30,6 +56,16 @@ function App() {
           errorMessage="Please check again"
         />
         <Input type="text" placeholder="Text Field Empty" error />
+      </div>
+      <p className="my-8">DropDown</p>
+      <div className="mt-8 flex gap-4 flex-wrap">
+        <DropDown
+          // disabled={true}
+          icon={<RemoveLink />}
+          dropDownItems={dropItems}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
       </div>
     </div>
   );
