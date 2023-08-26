@@ -11,7 +11,9 @@ function NotFound() {
     <main className="w-screen h-screen flex flex-col justify-center items-center gap-10">
       <img src={notFoundImage} width={350} />
       <Link to="/">
-        <Button variant="secondary">Go Home</Button>
+        <Button variant="secondary" size="base">
+          Go Home
+        </Button>
       </Link>
     </main>
   );

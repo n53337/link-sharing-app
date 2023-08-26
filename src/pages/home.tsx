@@ -1,5 +1,7 @@
+import Editor from "@/components/home/Editor";
+
 function Home() {
-  return <div>home</div>;
+  return <Editor />;
 }
 
 export default Home;

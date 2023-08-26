@@ -36,7 +36,7 @@ function Tabs({
           onClick={() => setSelectedItem(item.id)}
         >
           {item.icon}
-          <p className="hidden lg:block">{item.item}</p>
+          <p className="hidden md:block">{item.item}</p>
         </div>
       ))}
     </div>

@@ -23,7 +23,9 @@ function LoginForm() {
           placeholder="Enter your password"
         />
       </div>
-      <Button variant="primary">Login</Button>
+      <Button variant="primary" size="base">
+        Login
+      </Button>
       <div className="flex flex-col md:flex-row justify-center items-center gap-1">
         <p className="text-grey-50 text-base">Don’t have an account?</p>
         <Link to="/register" className="text-purple text-base">
