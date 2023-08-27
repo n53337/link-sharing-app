@@ -3,8 +3,8 @@ import { ArrowEmailForward, ShareAndroid } from "iconoir-react";
 
 function PreviewHeader() {
   return (
-    <header className="w-full p-6">
-      <div className="flex justify-between items-center bg-white rounded-lg">
+    <header className="w-full">
+      <div className="flex justify-between items-center bg-white rounded-lg p-4">
         {/* Desktop Navbar */}
 
         <span className="hidden md:block">
