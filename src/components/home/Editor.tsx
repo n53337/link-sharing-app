@@ -5,6 +5,7 @@ import { TabsItems } from "@/ui/Tabs";
 import { Link, ProfileCircle } from "iconoir-react";
 import CustomizeSection from "../editor/CustomizeSection";
 import MobileMockup from "../editor/MobileMockup";
+import { AppSpinner, AppLoader } from "@/ui/AppSpinner";
 
 function Editor() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function Editor() {
           <CustomizeSection />
         </div>
       </div>
+      <AppSpinner loading={false} />
     </main>
   );
 }

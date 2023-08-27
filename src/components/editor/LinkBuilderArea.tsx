@@ -18,14 +18,11 @@ function LinkBuilderArea() {
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-    console.log("ACTIVE: " + active.id);
-    console.log("OVER :" + over.id);
 
     if (active.id !== over.id) {
       setItems((items) => {
         const activeIndex = items.indexOf(active.id);
         const overIndex = items.indexOf(over.id);
-        console.log(arrayMove(items, activeIndex, overIndex));
         return arrayMove(items, activeIndex, overIndex);
       });
     }

@@ -1,4 +1,4 @@
-import { AppNotification, DeleteCircle } from "iconoir-react";
+import { DeleteCircle } from "iconoir-react";
 import { ReactElement, useState } from "react";
 
 interface NotificationProps {
@@ -12,9 +12,7 @@ function Notification({ message, onClose, type, icon }: NotificationProps) {
 
   const closeNotification = () => {
     setIsVisible(false);
-    setTimeout(() => {
-      onClose();
-    }, 500);
+    onClose();
   };
 
   return (
@@ -22,7 +20,7 @@ function Notification({ message, onClose, type, icon }: NotificationProps) {
       <div
         className={`${
           type == "success" ? "bg-green-700" : "bg-error"
-        } p-4 text-white text-center animate-slide-up flex items-center gap-6 rounded-lg drop-shadow-xl ${
+        } p-4 text-white text-center  flex items-center gap-6 rounded-lg drop-shadow-xl animate-slide-up ${
           isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
