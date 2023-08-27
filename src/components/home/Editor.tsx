@@ -4,6 +4,7 @@ import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
 import { Link, ProfileCircle } from "iconoir-react";
 import CustomizeSection from "../editor/CustomizeSection";
+import MobileMockup from "../editor/MobileMockup";
 
 function Editor() {
   useEffect(() => {
@@ -33,7 +34,10 @@ function Editor() {
         setSelectedItem={setSelectedItem}
       />
 
-      <div>
+      <div className="flex gap-4">
+        <div className="hidden lg:flex">
+          <MobileMockup />
+        </div>
         <CustomizeSection />
       </div>
     </main>

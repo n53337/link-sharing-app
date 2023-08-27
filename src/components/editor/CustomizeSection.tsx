@@ -27,7 +27,7 @@ function CustomizeSection() {
             <h2 className="font-bold text-grey text-2xl">
               Let’s get you started
             </h2>
-            <p className="text-grey-50 text-center">
+            <p className="text-grey-50 text-center md:px-8">
               Use the “Add new link” button to get started. Once you have more
               than one link, you can reorder and edit them. We’re here to help
               you share your profiles with everyone!

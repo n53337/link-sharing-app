@@ -11,6 +11,7 @@ export default {
         "grey-50": "#737373",
         "grey-10": "#D9D9D9",
         "grey-light": "#FAFAFA",
+        "grey-placeholder": "#EEEEEE",
         white: "#FFFFFF",
         error: "#FF3939",
       },
@@ -20,6 +21,9 @@ export default {
       },
       width: {
         120: "42rem",
+      },
+      borderRadius: {
+        mobile: "70px",
       },
     },
   },
