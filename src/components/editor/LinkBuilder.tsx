@@ -4,7 +4,7 @@ import { useState } from "react";
 import { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
 
-function LinkBuilder() {
+function LinkBuilder({ id }: { id: any }) {
   const [selectedItem, setSelectedItem] = useState(null);
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4">
@@ -14,7 +14,7 @@ function LinkBuilder() {
             <span className="w-4 h-0.5 bg-grey-50"></span>
             <span className="w-4 h-0.5 bg-grey-50"></span>
           </span>
-          <p className="text-grey-50 font-bold">Link #1</p>
+          <p className="text-grey-50 font-bold">Link #{id}</p>
         </span>
         <p className="text-grey-50 cursor-pointer hover:text-grey transition duration-300 ease-in-out">
           Remove

@@ -1,7 +1,7 @@
 import Button from "@/ui/Button";
 import { Plus } from "iconoir-react";
 import GetStartedLayout from "./GetStartedLayout";
-import LinkBuilder from "./LinkBuilder";
+import LinkBuilderArea from "./LinkBuilderArea";
 
 function LinksSection() {
   return (
@@ -25,9 +25,9 @@ function LinksSection() {
 
       {/* Get Started */}
 
-      <div className="overflow-auto">
+      <div className="overflow-auto flex flex-col gap-6">
         {/* <GetStartedLayout /> */}
-        <LinkBuilder />
+        <LinkBuilderArea />
       </div>
     </div>
   );
