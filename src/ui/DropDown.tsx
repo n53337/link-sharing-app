@@ -76,7 +76,7 @@ export default function DropDown({
         )}
       </div>
       {isOpen ? (
-        <div className="w-full h-64 overflow-scroll flex flex-col divide-y border border-grey-10 rounded-lg shadow-drop-down">
+        <div className="w-full h-64 overflow-auto flex flex-col divide-y border border-grey-10 rounded-lg shadow-drop-down">
           {dropDownItems.map((item) => (
             <div
               key={item.id}
