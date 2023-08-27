@@ -4,6 +4,7 @@ import Login from "@/pages/login";
 import Register from "@/pages/register";
 import Home from "@/pages/home";
 import NotFound from "@/pages/notFound";
+import Preview from "@/pages/preview";
 
 interface CustomRouteProps {
   isAuthenticated: boolean;
@@ -56,6 +57,17 @@ function AppRouter() {
               isAuthenticated={auth}
               redirect="/login"
               component={<Home />}
+            />
+          }
+        />
+
+        <Route
+          path="/:username"
+          element={
+            <CustomRoute
+              isAuthenticated={true}
+              redirect="/login"
+              component={<Preview />}
             />
           }
         />

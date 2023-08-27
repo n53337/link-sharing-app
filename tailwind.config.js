@@ -25,6 +25,9 @@ export default {
       borderRadius: {
         mobile: "70px",
       },
+      scale: {
+        "-100": "-1",
+      },
     },
   },
   plugins: [],
