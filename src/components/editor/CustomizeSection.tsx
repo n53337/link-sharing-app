@@ -1,6 +1,8 @@
 import Button from "@/ui/Button";
 import LinksSection from "./LinksSection";
 import ProfileSection from "./ProfileSection";
+import Notification from "../shared/Notification";
+import { Link } from "iconoir-react";
 
 function CustomizeSection() {
   return (
@@ -24,6 +26,12 @@ function CustomizeSection() {
           </div>
         </div>
       </div>
+      <Notification
+        message="Your changes have been successfully saved!"
+        onClose={() => console.log("close")}
+        type="success"
+        icon={<Link />}
+      />
     </section>
   );
 }
