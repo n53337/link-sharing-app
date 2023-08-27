@@ -1,4 +1,4 @@
-import { BeatLoader, MoonLoader, PropagateLoader } from "react-spinners";
+import { MoonLoader, PropagateLoader } from "react-spinners";
 import brandLogo from "@/assets/brand/logo_icon.svg";
 
 interface AppSpinnerProps {

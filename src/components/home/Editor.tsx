@@ -5,7 +5,7 @@ import { TabsItems } from "@/ui/Tabs";
 import { Link, ProfileCircle } from "iconoir-react";
 import CustomizeSection from "../editor/CustomizeSection";
 import MobileMockup from "../editor/MobileMockup";
-import { AppSpinner, AppLoader } from "@/ui/AppSpinner";
+import { AppSpinner } from "@/ui/AppSpinner";
 
 function Editor() {
   useEffect(() => {
