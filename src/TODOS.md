@@ -1,2 +1,2 @@
-[] Buttons Loading Layout
-[] App Custom Loader State Design
+[x] Buttons Loading Layout
+[x] App Custom Loader State Design

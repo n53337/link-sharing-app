@@ -10,7 +10,7 @@ export function AppSpinner({ loading }: AppSpinnerProps) {
     <div
       className={`${
         loading ? "" : "hidden"
-      }absolute top-0 bottom-0 left-0 right-0 z-20 flex flex-col justify-center items-center gap-4 bg-[rgba(255,255,255,.9)]`}
+      } absolute top-0 bottom-0 left-0 right-0 z-20 flex flex-col justify-center items-center gap-4 bg-[rgba(255,255,255,.9)]`}
     >
       <img src={brandLogo} width={70} className="animate-loop-opacity" />
       <PropagateLoader
