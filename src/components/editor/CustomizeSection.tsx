@@ -8,8 +8,8 @@ function CustomizeSection() {
       <div className="flex flex-col justify-between h-full max-h-full bg-white rounded-lg">
         {/* Section Mockup */}
 
-        {/* <LinksSection /> */}
-        <ProfileSection />
+        <LinksSection />
+        {/* <ProfileSection /> */}
         {/* Cta */}
 
         <div className="bg-white border-t border-t-grey-10 p-4 flex items-center">

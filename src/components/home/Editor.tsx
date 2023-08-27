@@ -34,11 +34,13 @@ function Editor() {
         setSelectedItem={setSelectedItem}
       />
 
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-4">
         <div className="hidden lg:flex">
           <MobileMockup />
         </div>
-        <CustomizeSection />
+        <div className="flex-1">
+          <CustomizeSection />
+        </div>
       </div>
     </main>
   );
