@@ -34,7 +34,7 @@ function Editor() {
         setSelectedItem={setSelectedItem}
       />
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-center">
         <div className="hidden lg:flex">
           <MobileMockup />
         </div>
