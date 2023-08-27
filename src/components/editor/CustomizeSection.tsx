@@ -14,9 +14,12 @@ function CustomizeSection() {
 
         <div className="bg-white border-t border-t-grey-10 p-4 flex items-center">
           <span className="hidden md:block w-full"></span>
-          <div className="w-full md:w-fit">
-            <Button variant="primary" size="base">
+          <div className="w-full md:w-fit flex gap-2">
+            <Button variant="secondary" size="base">
               Save
+            </Button>
+            <Button variant="primary" size="base">
+              Publish
             </Button>
           </div>
         </div>
