@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
 import { Link, ProfileCircle } from "iconoir-react";
+import CustomizeSection from "../editor/CustomizeSection";
 
 function Editor() {
   useEffect(() => {
@@ -25,12 +26,16 @@ function Editor() {
   ];
 
   return (
-    <main className="bg-grey-light">
+    <main className="bg-grey-light h-screen">
       <Navbar
         tabsItems={tabItems}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
       />
+
+      <div>
+        <CustomizeSection />
+      </div>
     </main>
   );
 }

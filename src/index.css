@@ -7,3 +7,7 @@
 ::placeholder {
   font-family: "Instrument Sans", sans-serif;
 }
+
+.w-cta {
+  width: calc(100% - 2rem);
+}

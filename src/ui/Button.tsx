@@ -10,7 +10,8 @@ interface ButtonProps extends ComponentProps<"button"> {
 const Button = ({ variant, active, size, ...rest }: ButtonProps) => {
   // Button Base Styles
   const buttonStyles = clsx({
-    "rounded-lg font-semibold transition duration-300 ease-in-out": true,
+    "rounded-lg font-semibold transition duration-300 ease-in-out flex items-center justify-center gap-1":
+      true,
     "px-4 py-3": size == "sm",
     "px-16 py-3 w-full": size == "base",
     " bg-purple border border-transparent text-white hover:bg-purple-50 hover:shadow-btn":

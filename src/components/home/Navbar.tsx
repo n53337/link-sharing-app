@@ -12,7 +12,7 @@ interface NavbarProps {
 
 function Navbar({ tabsItems, selectedItem, setSelectedItem }: NavbarProps) {
   return (
-    <header className="w-full px-6 py-4 bg-white flex justify-between items-center shadow-drop-down">
+    <header className="w-full fixed z-20 px-6 py-4 bg-white flex justify-between items-center shadow-drop-down">
       <img src={brandIcon} className="md:hidden" />
       <img src={brandLogo} className="hidden md:block" />
       <div>
