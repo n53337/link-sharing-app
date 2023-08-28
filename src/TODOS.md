@@ -4,7 +4,7 @@
 <!-- Auth Todos -->
 
 [upcomming] Social Auth
-[] implement Login with email and password
-[] Client Side verification(valid email format, valid password)
-[] implement Register feature
+[x] implement Login with email and password
+[x] Client Side verification(valid email format, valid password)
+[todo] implement Register feature
 [] Sessions Security

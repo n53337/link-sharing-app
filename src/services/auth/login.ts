@@ -34,7 +34,7 @@ export const login = async ({
     );
     setLoading(false);
     console.log(loginData.user);
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Empty password field
     setPassword("");
     setLoading(false);
