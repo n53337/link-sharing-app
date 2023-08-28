@@ -1,11 +1,20 @@
 import brandLogo from "@/assets/brand/full_logo.svg";
 import LoginForm from "@/components/login/LoginForm";
 import { BRAND_NAME } from "@/helpers/constants";
+import { firebaseAuth } from "@/services/firebase";
+import {
+  browserLocalPersistence,
+  getAuth,
+  setPersistence,
+} from "firebase/auth";
 import { useEffect } from "react";
 
 function Login() {
   useEffect(() => {
     document.title = `Login - ${BRAND_NAME}`;
+
+    // Login Session Setup
+    setPersistence(firebaseAuth, browserLocalPersistence);
   }, []);
 
   return (

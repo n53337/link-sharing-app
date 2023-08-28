@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { Navigate, Route, Routes, To } from "react-router-dom";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
@@ -62,7 +62,7 @@ function AppRouter() {
         />
 
         <Route
-          path="/:username"
+          path="/preview/:username"
           element={
             <CustomRoute
               isAuthenticated={true}
