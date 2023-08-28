@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../firebase";
 import {
   AuthErrors,
@@ -6,38 +6,39 @@ import {
   AuthErrorsTypes,
   getAuthErrorType,
 } from "./authErrors";
+import { LoginProps } from "./login";
 import { Dispatch, SetStateAction } from "react";
-import { LoginErrorState } from "@/components/login/LoginForm";
 
-export interface LoginProps {
-  email: string;
-  password: string;
-  setLoading: Dispatch<SetStateAction<boolean>>;
-  setError: Dispatch<SetStateAction<LoginErrorState>>;
-  setPassword: Dispatch<SetStateAction<string>>;
+interface RegisterProps extends LoginProps {
+  passwordConfirm: string;
+  setPasswordConfirm: Dispatch<SetStateAction<string>>;
 }
 
-export const login = async ({
+export const register = async ({
   email,
   password,
+  passwordConfirm,
   setLoading,
   setError,
   setPassword,
-}: LoginProps) => {
+  setPasswordConfirm,
+}: RegisterProps) => {
   setLoading(true);
 
   try {
-    const loginData = await signInWithEmailAndPassword(
+    const registerResponse = await createUserWithEmailAndPassword(
       firebaseAuth,
       email,
       password
     );
+
+    // TODO: Add created user to the database
+
     setLoading(false);
-    console.log(loginData.user);
-  } catch (error: unknown) {
-    // Empty password field
+  } catch (error: any) {
     setPassword("");
-    setLoading(false);
+    setPasswordConfirm("");
+    // Handle Errors
     if (error.code in AuthErrors) {
       const errorType = getAuthErrorType(AuthErrorsList[error.code]);
       setError({ error: AuthErrors[error.code], type: errorType });

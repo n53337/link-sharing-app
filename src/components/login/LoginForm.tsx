@@ -5,7 +5,7 @@ import { AppSpinner } from "@/ui/AppSpinner";
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";
 import { Lock, Mail } from "iconoir-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export interface LoginErrorState {
@@ -21,12 +21,6 @@ function LoginForm() {
     error: null,
     type: null,
   });
-  // const [emailError, setEmailError] = useState("");
-  // const [passwordError, setPasswordError] = useState("");
-
-  useEffect(() => {
-    console.log("login Error: ", loginError);
-  }, [loginError]);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
