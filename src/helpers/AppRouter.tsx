@@ -19,7 +19,7 @@ export const CustomRoute = ({
   isAuthenticated ? component : <Navigate to={redirect} />;
 
 function AppRouter() {
-  const auth = true; // Auth logic here ...
+  const auth = false; // Auth logic here ...
 
   return (
     <>

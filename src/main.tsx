@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { IconoirProvider } from "iconoir-react";
+import AppRouter from "./helpers/AppRouter.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -16,7 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           height: "1em",
         }}
       >
-        <App />
+        {/* <App /> */}
+        <AppRouter />
       </IconoirProvider>
     </BrowserRouter>
   </React.StrictMode>

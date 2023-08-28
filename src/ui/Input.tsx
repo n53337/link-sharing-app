@@ -3,7 +3,7 @@ import { ComponentProps, ReactElement } from "react";
 
 interface InputProps extends ComponentProps<"input"> {
   error?: boolean;
-  errorMessage?: String;
+  errorMessage?: string;
   icon?: ReactElement;
 }
 
@@ -24,10 +24,8 @@ const Input = ({ error, icon, errorMessage, ...rest }: InputProps) => {
     <div className="w-full relative">
       {icon ? <span className="absolute top-4 left-4">{icon}</span> : null}
       <input {...rest} className={inputStyles} />
-      {errorMessage ? (
-        <span className="absolute top-3.5 right-4 font-normal text-sm text-error">
-          {errorMessage}
-        </span>
+      {errorMessage && error ? (
+        <span className="font-normal text-sm text-error">{errorMessage}</span>
       ) : null}
     </div>
   );
