@@ -29,7 +29,6 @@ function RegisterForm() {
         register({
           email,
           password,
-          passwordConfirm,
           setLoading,
           setError: setRegisterError,
           setPassword,

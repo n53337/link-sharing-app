@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { firebaseAuth } from "../firebase";
+import { firebaseAuth, firebaseDb } from "../firebase";
 import {
   AuthErrors,
   AuthErrorsList,
@@ -8,16 +8,15 @@ import {
 } from "./authErrors";
 import { LoginProps } from "./login";
 import { Dispatch, SetStateAction } from "react";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 interface RegisterProps extends LoginProps {
-  passwordConfirm: string;
   setPasswordConfirm: Dispatch<SetStateAction<string>>;
 }
 
 export const register = async ({
   email,
   password,
-  passwordConfirm,
   setLoading,
   setError,
   setPassword,
@@ -31,8 +30,17 @@ export const register = async ({
       email,
       password
     );
+    console.log(registerResponse);
 
     // TODO: Add created user to the database
+    const userData = {
+      avatar: null,
+      email: registerResponse.user.email,
+      first_name: null,
+      last_name: null,
+      username: null,
+    };
+    await setDoc(doc(firebaseDb, "Users", registerResponse.user.uid), userData);
 
     setLoading(false);
   } catch (error: any) {

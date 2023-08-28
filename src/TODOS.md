@@ -6,6 +6,8 @@
 [upcomming] Social Auth
 [x] implement Login with email and password
 [x] Client Side verification(valid email format, valid password)
-[todo] implement Register feature
-[todo] pwd and pwdConfirm should be verified in the client side
-[] Sessions Security
+[x] implement Register feature
+[x] pwd and pwdConfirm should be verified in the client side
+[x] Sessions Security
+[] register user to DB
+[] manage auth state
