@@ -5,6 +5,7 @@ export interface TabsItems {
   id: Key;
   icon: ReactElement;
   item: String;
+  onClick: () => void;
 }
 
 interface TabsProps extends ComponentProps<"div"> {
@@ -24,6 +25,11 @@ function Tabs({
       true,
   });
 
+  const handleTabClick = (id: Key, callback: () => void) => {
+    setSelectedItem(id);
+    callback();
+  };
+
   return (
     <div {...rest} className="w-full flex items-center gap-4">
       {tabsItems.map((item) => (
@@ -34,7 +40,7 @@ function Tabs({
               ? "bg-purple-10 text-purple"
               : "bg-none text-grey hover:text-purple"
           }`}
-          onClick={() => setSelectedItem(item.id)}
+          onClick={() => handleTabClick(item.id, item.onClick)}
         >
           {item.icon}
           <p className="hidden md:block">{item.item}</p>

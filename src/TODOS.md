@@ -12,3 +12,4 @@
 [x] register user to DB
 [x] manage auth state
 [todo] Handle App Notification
+[todo] App Logic

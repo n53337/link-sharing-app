@@ -14,17 +14,20 @@ function Editor() {
   }, []);
 
   const [selectedItem, setSelectedItem] = useState(1);
+  const [activeTab, setActiveTab] = useState(1);
 
   const tabItems: Array<TabsItems> = [
     {
       id: 1,
       icon: <Link strokeWidth={2} />,
       item: "Links",
+      onClick: () => setActiveTab(1),
     },
     {
       id: 2,
       icon: <ProfileCircle strokeWidth={2} />,
       item: "Profile Details",
+      onClick: () => setActiveTab(2),
     },
   ];
 
@@ -41,16 +44,10 @@ function Editor() {
           <MobileMockup />
         </div>
         <div className="flex-1">
-          <CustomizeSection />
+          <CustomizeSection activeTab={activeTab} />
         </div>
       </div>
       <AppSpinner loading={false} />
-      <Notification
-        onClose={() => {}}
-        message="You have logged in successfully!"
-        type="success"
-        icon={<DoubleCheck />}
-      />
     </main>
   );
 }
