@@ -1,4 +1,10 @@
+import { EditorContext } from "@/contexts/EditorContextProvider";
+import { useContext } from "react";
+
 function MobileMockup() {
+  const { pageData, setPageData } = useContext(EditorContext);
+
+  const { avatar, email, name, links } = pageData;
   return (
     <section className="h-full pt-20">
       <div className="p-4 h-full">
@@ -31,13 +37,39 @@ function MobileMockup() {
               />
             </svg>
             <div className="absolute top-0 w-full flex flex-col items-center gap-10 px-6 py-12">
-              <div className="flex flex-col items-center justify-center gap-8">
-                <div className="rounded-full bg-grey-placeholder w-28 h-28"></div>
-                <div className="flex flex-col items-center justify-center gap-3">
-                  <div className="rounded-full bg-grey-placeholder w-40 h-4"></div>
-                  <div className="rounded-full bg-grey-placeholder w-20 h-2"></div>
+              <div className="flex flex-col items-center justify-center gap-5">
+                <div
+                  className={`rounded-full bg-grey-placeholder w-28 h-28 border-purple overflow-hidden ${
+                    avatar ? "border-2" : ""
+                  }`}
+                >
+                  {avatar ? (
+                    <img
+                      className="w-full h-full object-cover"
+                      src={avatar}
+                      alt={name ?? "avatar"}
+                    />
+                  ) : null}
+                </div>
+
+                <div
+                  className={`flex flex-col items-center justify-center ${
+                    name && email ? "" : "gap-4"
+                  }`}
+                >
+                  {name ? (
+                    <p className="text-grey font-semibold text-lg">{name}</p>
+                  ) : (
+                    <div className="rounded-full bg-grey-placeholder w-40 h-4"></div>
+                  )}
+                  {email ? (
+                    <p className="text-grey-50 text-sm">{email}</p>
+                  ) : (
+                    <div className="rounded-full bg-grey-placeholder w-20 h-2"></div>
+                  )}
                 </div>
               </div>
+
               <div className="flex flex-col gap-6">
                 <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
                 <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>

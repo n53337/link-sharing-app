@@ -9,7 +9,7 @@ interface CustomizeSectionProps {
 }
 
 function CustomizeSection({ activeTab }: CustomizeSectionProps) {
-  const { pageData, setPageData } = useContext(EditorContext);
+  // const { pageData, setPageData } = useContext(EditorContext);
 
   return (
     <section className="h-screen max-h-screen pt-24">
