@@ -7,6 +7,7 @@ import CustomizeSection from "../editor/CustomizeSection";
 import MobileMockup from "../editor/MobileMockup";
 import { AppSpinner } from "@/ui/AppSpinner";
 import Notification from "../shared/Notification";
+import EditorContextProvider from "@/contexts/EditorContextProvider";
 
 function Editor() {
   useEffect(() => {
@@ -39,14 +40,17 @@ function Editor() {
         setSelectedItem={setSelectedItem}
       />
 
-      <div className="flex gap-4">
-        <div className="hidden lg:flex">
-          <MobileMockup />
+      <EditorContextProvider>
+        <div className="flex gap-4">
+          <div className="hidden lg:flex">
+            <MobileMockup />
+          </div>
+          <div className="flex-1">
+            <CustomizeSection activeTab={activeTab} />
+          </div>
         </div>
-        <div className="flex-1">
-          <CustomizeSection activeTab={activeTab} />
-        </div>
-      </div>
+      </EditorContextProvider>
+
       <AppSpinner loading={false} />
     </main>
   );

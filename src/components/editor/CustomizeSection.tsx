@@ -1,12 +1,16 @@
 import Button from "@/ui/Button";
 import ProfileSection from "./ProfileSection";
 import LinksSection from "./LinksSection";
+import { useContext } from "react";
+import { EditorContext } from "@/contexts/EditorContextProvider";
 
 interface CustomizeSectionProps {
   activeTab: number;
 }
 
 function CustomizeSection({ activeTab }: CustomizeSectionProps) {
+  const { pageData, setPageData } = useContext(EditorContext);
+
   return (
     <section className="h-screen max-h-screen pt-24">
       <div className="flex flex-col justify-between h-full max-h-full bg-white rounded-lg">
