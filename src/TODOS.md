@@ -9,5 +9,6 @@
 [x] implement Register feature
 [x] pwd and pwdConfirm should be verified in the client side
 [x] Sessions Security
-[] register user to DB
-[] manage auth state
+[x] register user to DB
+[x] manage auth state
+[todo] Handle App Notification

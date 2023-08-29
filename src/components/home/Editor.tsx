@@ -2,10 +2,11 @@ import { BRAND_NAME } from "@/helpers/constants";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
-import { Link, ProfileCircle } from "iconoir-react";
+import { DoubleCheck, Link, ProfileCircle } from "iconoir-react";
 import CustomizeSection from "../editor/CustomizeSection";
 import MobileMockup from "../editor/MobileMockup";
 import { AppSpinner } from "@/ui/AppSpinner";
+import Notification from "../shared/Notification";
 
 function Editor() {
   useEffect(() => {
@@ -44,6 +45,12 @@ function Editor() {
         </div>
       </div>
       <AppSpinner loading={false} />
+      <Notification
+        onClose={() => {}}
+        message="You have logged in successfully!"
+        type="success"
+        icon={<DoubleCheck />}
+      />
     </main>
   );
 }
