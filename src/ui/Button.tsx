@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ComponentProps } from "react";
 
 interface ButtonProps extends ComponentProps<"button"> {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" | "error";
   active?: boolean;
   size?: "sm" | "base";
 }
@@ -19,6 +19,8 @@ const Button = ({ variant, active, size, ...rest }: ButtonProps) => {
     "bg-purple opacity-25 cursor-not-allowed": rest.disabled,
     "border border-purple bg-transparent text-purple hover:bg-purple-10":
       variant == "secondary",
+    "border border-error bg-transparent text-error hover:opacity-50":
+      variant == "error",
   });
 
   return (

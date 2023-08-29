@@ -26,6 +26,7 @@ function AppRouter() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    // Global Auth State Listner
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
       console.log("AUTH STATE CHANGED", user);
       setLoading(false);
