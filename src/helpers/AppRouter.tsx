@@ -1,10 +1,13 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Navigate, Route, Routes, To } from "react-router-dom";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import Home from "@/pages/home";
 import NotFound from "@/pages/notFound";
 import Preview from "@/pages/preview";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "@/services/firebase";
+import { AppSpinner } from "@/ui/AppSpinner";
 
 interface CustomRouteProps {
   isAuthenticated: boolean;
@@ -19,62 +22,78 @@ export const CustomRoute = ({
   isAuthenticated ? component : <Navigate to={redirect} />;
 
 function AppRouter() {
-  const auth = true; // Auth logic here ...
+  const [auth, setAuth] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    // Global Auth State Listner
+    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+      console.log("AUTH STATE CHANGED", user);
+      setLoading(false);
+      user ? setAuth(true) : setAuth(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
-      <Routes>
-        {/* --- AUTH ROUTES --- */}
+      {loading ? (
+        <AppSpinner loading={loading} />
+      ) : (
+        <Routes>
+          {/* --- AUTH ROUTES --- */}
 
-        <Route
-          path="/login"
-          element={
-            <CustomRoute
-              isAuthenticated={!auth}
-              redirect="/"
-              component={<Login />}
-            />
-          }
-        />
+          <Route
+            path="/login"
+            element={
+              <CustomRoute
+                isAuthenticated={!auth}
+                redirect="/"
+                component={<Login />}
+              />
+            }
+          />
 
-        <Route
-          path="/register"
-          element={
-            <CustomRoute
-              isAuthenticated={!auth}
-              redirect="/"
-              component={<Register />}
-            />
-          }
-        />
+          <Route
+            path="/register"
+            element={
+              <CustomRoute
+                isAuthenticated={!auth}
+                redirect="/"
+                component={<Register />}
+              />
+            }
+          />
 
-        {/* --- APP ROUTES --- */}
+          {/* --- APP ROUTES --- */}
 
-        <Route
-          path="/"
-          element={
-            <CustomRoute
-              isAuthenticated={auth}
-              redirect="/login"
-              component={<Home />}
-            />
-          }
-        />
+          <Route
+            path="/"
+            element={
+              <CustomRoute
+                isAuthenticated={auth}
+                redirect="/login"
+                component={<Home />}
+              />
+            }
+          />
 
-        <Route
-          path="/:username"
-          element={
-            <CustomRoute
-              isAuthenticated={true}
-              redirect="/login"
-              component={<Preview />}
-            />
-          }
-        />
+          <Route
+            path="/preview/:username"
+            element={
+              <CustomRoute
+                isAuthenticated={true}
+                redirect="/login"
+                component={<Preview />}
+              />
+            }
+          />
 
-        {/* 404 ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* 404 ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      )}
     </>
   );
 }
