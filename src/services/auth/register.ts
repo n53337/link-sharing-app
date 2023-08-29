@@ -8,7 +8,7 @@ import {
 } from "./authErrors";
 import { LoginProps } from "./login";
 import { Dispatch, SetStateAction } from "react";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 interface RegisterProps extends LoginProps {
   setPasswordConfirm: Dispatch<SetStateAction<string>>;
@@ -30,9 +30,8 @@ export const register = async ({
       email,
       password
     );
-    console.log(registerResponse);
 
-    // TODO: Add created user to the database
+    // Add created user to the database
     const userData = {
       avatar: null,
       email: registerResponse.user.email,
