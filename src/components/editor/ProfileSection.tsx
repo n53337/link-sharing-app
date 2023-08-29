@@ -21,7 +21,13 @@ function ProfileSection() {
       <AppSpinner loading={loading} />
 
       <div className="flex flex-col gap-3">
-        <h2 className="font-bold text-grey text-2xl">Profile Details</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="font-bold text-grey text-2xl">Profile Details</h2>
+          <Button variant="error" size="sm" onClick={handleSignOut}>
+            <LogOut strokeWidth={2} />
+            Logout
+          </Button>
+        </div>
         <p className="text-grey-50">
           Add your details to create a personal touch to your profile.
         </p>
@@ -32,10 +38,6 @@ function ProfileSection() {
       <div className="overflow-auto flex flex-col gap-6">
         <ProfilePictureUpdate />
         <ProfileEditForm />
-        <Button variant="error" size="base" onClick={handleSignOut}>
-          <LogOut strokeWidth={2} />
-          Logout
-        </Button>
       </div>
     </div>
   );

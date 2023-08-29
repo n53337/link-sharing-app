@@ -28,6 +28,7 @@ function Tabs({
     <div {...rest} className="w-full flex items-center gap-4">
       {tabsItems.map((item) => (
         <div
+          key={item.id}
           className={`${tabStyle} ${
             selectedItem == item.id
               ? "bg-purple-10 text-purple"
