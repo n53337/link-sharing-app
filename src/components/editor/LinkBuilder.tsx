@@ -1,14 +1,27 @@
 import DropDown from "@/ui/DropDown";
 import { Link, MenuScale } from "iconoir-react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
 import { SortableProps } from "./SortableLinkBuilder";
+import { EditorContext } from "@/contexts/EditorContextProvider";
 
 interface LinkBuilderProps extends SortableProps {}
 
 function LinkBuilder({ id, linkItem }: LinkBuilderProps) {
+  const { pageData, setPageData } = useContext(EditorContext);
   const [selectedItem, setSelectedItem] = useState(linkItem);
+
+  useEffect(() => {
+    const newLinks = pageData.links;
+    const choosedItem = pageData.links.findIndex((item) => item.id == id);
+    newLinks[choosedItem] = LinksMenuList.find(
+      (item) => item.item == selectedItem.item
+    );
+    setPageData({ ...pageData, links: newLinks });
+
+    console.log("mobile items: ", newLinks);
+  }, [selectedItem]);
 
   // TODO: Update The Mobile mockup when it updates on the dropdown
 
