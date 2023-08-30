@@ -16,9 +16,6 @@ function LinksSection() {
     icon: <WarningHexagon />,
   });
 
-  /*
-    TODO: ADD NEW LINK
-  */
   const addNewLink = () => {
     if (pageData.links.length < LinksMenuList.length) {
       const newLinks = pageData.links;
@@ -31,7 +28,6 @@ function LinksSection() {
         message: "Sorry, you've reached out the links limit",
         icon: <WarningHexagon />,
       });
-      console.log(notif);
     }
   };
 

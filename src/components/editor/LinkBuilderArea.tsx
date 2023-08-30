@@ -56,7 +56,7 @@ function LinkBuilderArea() {
         <SortableContext items={links} strategy={verticalListSortingStrategy}>
           {/* We need components that use the useSortable hook */}
           {links.map((item) => (
-            <SortableLinkBuilder key={item.id} id={item.id} />
+            <SortableLinkBuilder key={item.id} id={item.id} linkItem={item} />
           ))}
         </SortableContext>
       </div>

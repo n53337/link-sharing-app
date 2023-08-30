@@ -2,11 +2,13 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import LinkBuilder from "./LinkBuilder";
+import { DropDownItems } from "@/ui/DropDown";
 
-interface SortableProps {
+export interface SortableProps {
   id: UniqueIdentifier;
+  linkItem: DropDownItems;
 }
-function SortableLinkBuilder({ id }: SortableProps) {
+function SortableLinkBuilder({ id, linkItem }: SortableProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -17,7 +19,7 @@ function SortableLinkBuilder({ id }: SortableProps) {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <LinkBuilder id={id} />
+      <LinkBuilder id={id} linkItem={linkItem} />
     </div>
   );
 }

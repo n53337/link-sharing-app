@@ -1,11 +1,17 @@
 import DropDown from "@/ui/DropDown";
 import { Link, MenuScale } from "iconoir-react";
 import { useState } from "react";
-import { LinksMenuListGrey } from "../shared/LinksMenuList";
+import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
+import { SortableProps } from "./SortableLinkBuilder";
 
-function LinkBuilder({ id }: { id: any }) {
-  const [selectedItem, setSelectedItem] = useState(null);
+interface LinkBuilderProps extends SortableProps {}
+
+function LinkBuilder({ id, linkItem }: LinkBuilderProps) {
+  const [selectedItem, setSelectedItem] = useState(linkItem);
+
+  // TODO: Update The Mobile mockup when it updates on the dropdown
+
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
       <div className="flex justify-between items-center">
@@ -38,7 +44,10 @@ function LinkBuilder({ id }: { id: any }) {
           <Input
             type="text"
             icon={<Link />}
-            placeholder="e.g. https://github.com/n53337"
+            placeholder={
+              LinksMenuList.find((e) => e.id == selectedItem.id)
+                ?.inputPlaceHolder
+            }
           />
         </div>
       </div>

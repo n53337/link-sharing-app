@@ -1,6 +1,13 @@
 import clsx from "clsx";
 import { NavArrowDown, NavArrowUp } from "iconoir-react";
-import { ComponentProps, Key, ReactElement, useState } from "react";
+import {
+  ComponentProps,
+  Dispatch,
+  Key,
+  ReactElement,
+  SetStateAction,
+  useState,
+} from "react";
 
 export interface DropDownItems {
   id: Key;
@@ -15,10 +22,10 @@ export interface DropDownItems {
 interface DropDownProps extends ComponentProps<"div"> {
   icon?: ReactElement;
   disabled?: boolean;
-  placeHolder: String;
+  placeHolder: string;
   dropDownItems: Array<DropDownItems>;
-  selectedItem: Number | null;
-  setSelectedItem: any;
+  selectedItem: DropDownItems;
+  setSelectedItem: Dispatch<SetStateAction<DropDownItems>>;
 }
 
 export default function DropDown({
@@ -59,7 +66,7 @@ export default function DropDown({
       >
         {selectedItem ? (
           <span className="absolute top-4 left-4">
-            {dropDownItems.find((e) => e.id == selectedItem)?.icon}
+            {dropDownItems.find((e) => e.id == selectedItem.id)?.icon}
           </span>
         ) : (
           <span className="absolute top-4 left-4">{icon}</span>
@@ -68,7 +75,7 @@ export default function DropDown({
         {!selectedItem ? (
           <p>{placeHolder}</p>
         ) : (
-          <p>{dropDownItems.find((e) => e.id == selectedItem)?.item}</p>
+          <p>{dropDownItems.find((e) => e.id == selectedItem.id)?.item}</p>
         )}
         {isOpen ? (
           <NavArrowUp {...dropDownNavIconProps} />
@@ -83,19 +90,20 @@ export default function DropDown({
               key={item.id}
               className="flex items-center gap-1 px-4 py-3 cursor-pointer hover:bg-purple-10 transition duration-300 ease-in-out"
               onClick={() => {
-                setSelectedItem(item.id);
+                console.log("SELECTED: ", item);
+                setSelectedItem(item);
                 setIsOpen(false);
               }}
             >
               {item.icon}
               <p
                 className={`font-normal pl-1 ${
-                  selectedItem == item.id ? "text-purple" : "text-grey"
+                  selectedItem.id == item.id ? "text-purple" : "text-grey"
                 }`}
               >
                 {item.item}
               </p>
-              {selectedItem == item.id ? (
+              {selectedItem.id == item.id ? (
                 <p className="font-normal text-purple">(selected)</p>
               ) : null}
             </div>

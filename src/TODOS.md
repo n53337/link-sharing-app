@@ -4,6 +4,7 @@
 <!-- Auth Todos -->
 
 [upcomming] Social Auth
+[upcomming] landing page
 [x] implement Login with email and password
 [x] Client Side verification(valid email format, valid password)
 [x] implement Register feature
@@ -13,3 +14,4 @@
 [x] manage auth state
 [todo] Handle App Notification
 [todo] App Logic
+[todo] AppSpinner custom message
