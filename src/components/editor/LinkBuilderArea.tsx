@@ -10,27 +10,39 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useState } from "react";
+import { useContext } from "react";
 import SortableLinkBuilder from "./SortableLinkBuilder";
+import { EditorContext } from "@/contexts/EditorContextProvider";
 
 function LinkBuilderArea() {
-  const [items, setItems] = useState([1]);
+  const { pageData, setPageData } = useContext(EditorContext);
+  const { links } = pageData;
+
+  // const [links, setLinks] = useState([1, 2]);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
 
     if (active.id !== over.id) {
-      setItems((items) => {
-        const activeIndex = items.indexOf(active.id);
-        const overIndex = items.indexOf(over.id);
-        return arrayMove(items, activeIndex, overIndex);
+      setPageData((pageData) => {
+        const activeIndex = pageData.links.findIndex(
+          (item) => item.id == active.id
+        );
+        const overIndex = pageData.links.findIndex(
+          (item) => item.id == over.id
+        );
+        const newPageData = {
+          ...pageData,
+          links: arrayMove(pageData.links, activeIndex, overIndex),
+        };
+        return newPageData;
       });
     }
   };
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { delay: 150, tolerance: 100 },
+      activationConstraint: { delay: 150, tolerance: 10 },
     })
   );
 
@@ -41,10 +53,10 @@ function LinkBuilderArea() {
       sensors={sensors}
     >
       <div className="flex flex-col gap-4">
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <SortableContext items={links} strategy={verticalListSortingStrategy}>
           {/* We need components that use the useSortable hook */}
-          {items.map((item) => (
-            <SortableLinkBuilder key={item} id={item} />
+          {links.map((item) => (
+            <SortableLinkBuilder key={item.id} id={item.id} />
           ))}
         </SortableContext>
       </div>

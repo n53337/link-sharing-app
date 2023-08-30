@@ -1,5 +1,6 @@
+import LinksMenuList from "@/components/shared/LinksMenuList";
 import { DropDownItems } from "@/ui/DropDown";
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { Dispatch, Key, SetStateAction, createContext, useState } from "react";
 
 interface PageData {
   avatar: string | null;
@@ -17,6 +18,7 @@ const defaultPageData: PageData = {
   avatar: null,
   name: null,
   email: null,
+  // links: [LinksMenuList[0], LinksMenuList[1], LinksMenuList[7]],
   links: [],
 };
 

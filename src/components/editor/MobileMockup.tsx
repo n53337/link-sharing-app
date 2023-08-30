@@ -1,10 +1,20 @@
 import { EditorContext } from "@/contexts/EditorContextProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
+import LinksPreviewList from "../shared/LinksPreviewList";
+import LinksMenuList from "../shared/LinksMenuList";
 
 function MobileMockup() {
   const { pageData, setPageData } = useContext(EditorContext);
-
   const { avatar, email, name, links } = pageData;
+
+  const newLinkRef = useRef(null);
+
+  useEffect(() => {
+    if (newLinkRef.current) {
+      newLinkRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [pageData]);
+
   return (
     <section className="h-full pt-20">
       <div className="p-4 h-full">
@@ -70,11 +80,36 @@ function MobileMockup() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 max-h-72 overflow-auto">
+                {links.length
+                  ? links.map((item, index) => (
+                      <div className="w-60 h-12" key={item.id}>
+                        <LinksPreviewList
+                          item={item}
+                          to="https://github.com/n53337"
+                        />
+                      </div>
+                    ))
+                  : Array.from({ length: 4 }, (v, i) => i).map((item) => (
+                      <div
+                        key={item}
+                        className="w-60 h-12 bg-grey-placeholder rounded-lg"
+                      ></div>
+                    ))}
+                {links.length ? (
+                  <div
+                    className="w-60 h-12"
+                    ref={(el) => {
+                      // Auto Scroll
+                      if (links.length == 4 && el) {
+                        newLinkRef.current = el;
+                      }
+                    }}
+                  ></div>
+                ) : null}
+                {/* <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
                 <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
-                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
-                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
-                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
+                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div> */}
               </div>
             </div>
           </div>

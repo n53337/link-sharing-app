@@ -5,10 +5,11 @@ import { ComponentProps, Key, ReactElement, useState } from "react";
 export interface DropDownItems {
   id: Key;
   icon: ReactElement;
-  item: String;
-  bgColor?: String;
-  arrowColor?: String;
-  border?: String;
+  item: string;
+  bgColor?: string;
+  arrowColor?: string;
+  border?: string;
+  inputPlaceHolder?: string;
 }
 
 interface DropDownProps extends ComponentProps<"div"> {

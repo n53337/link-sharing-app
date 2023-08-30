@@ -7,7 +7,7 @@ import Input from "@/ui/Input";
 function LinkBuilder({ id }: { id: any }) {
   const [selectedItem, setSelectedItem] = useState(null);
   return (
-    <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4">
+    <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
       <div className="flex justify-between items-center">
         <span className="flex items-center gap-2">
           <span className="flex flex-col gap-1">

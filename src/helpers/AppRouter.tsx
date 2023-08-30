@@ -8,6 +8,7 @@ import Preview from "@/pages/preview";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "@/services/firebase";
 import { AppSpinner } from "@/ui/AppSpinner";
+import { BRAND_NAME } from "./constants";
 
 interface CustomRouteProps {
   isAuthenticated: boolean;
@@ -26,9 +27,10 @@ function AppRouter() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    document.title = `${BRAND_NAME}`;
+
     // Global Auth State Listner
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
-      console.log("AUTH STATE CHANGED", user);
       setLoading(false);
       user ? setAuth(true) : setAuth(false);
     });

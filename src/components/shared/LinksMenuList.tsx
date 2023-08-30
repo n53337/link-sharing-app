@@ -14,7 +14,7 @@ import sof from "@/assets/vectors/sof.svg";
 
 import { DropDownItems } from "@/ui/DropDown";
 
-const LinksMenuList: Array<DropDownItems> = [
+export const LinksMenuList: Array<DropDownItems> = [
   {
     id: "p_1",
     icon: (
