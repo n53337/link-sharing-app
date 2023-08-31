@@ -1,17 +1,29 @@
 import DropDown from "@/ui/DropDown";
 import { Link, MenuScale } from "iconoir-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
 import { SortableProps } from "./SortableLinkBuilder";
+import { EditorContext } from "@/contexts/EditorContextProvider";
 
 interface LinkBuilderProps extends SortableProps {}
 
 function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
+  const { pageData, setPageData } = useContext(EditorContext);
+
   const [selectedItem, setSelectedItem] = useState(linkItem);
 
   // TODO: Update The Mobile mockup when it updates on the dropdown
   useEffect(() => {}, []);
+
+  const handleBuilderRemove = () => {
+    const newPageBuilders = pageData.builders;
+    const builderIndex = newPageBuilders.findIndex(
+      (builder) => builder.id == id
+    );
+    newPageBuilders.splice(builderIndex, 1);
+    setPageData({ ...pageData, builders: newPageBuilders });
+  };
 
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
@@ -23,7 +35,10 @@ function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
           </span>
           <p className="text-grey-50 font-bold">Link #{index}</p>
         </span>
-        <p className="text-grey-50 cursor-pointer hover:text-grey transition duration-300 ease-in-out">
+        <p
+          className="text-grey-50 cursor-pointer hover:text-grey transition duration-300 ease-in-out"
+          onClick={handleBuilderRemove}
+        >
           Remove
         </p>
       </div>
