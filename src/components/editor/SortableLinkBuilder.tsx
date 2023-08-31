@@ -7,8 +7,9 @@ import { DropDownItems } from "@/ui/DropDown";
 export interface SortableProps {
   id: UniqueIdentifier;
   linkItem: DropDownItems;
+  index: number;
 }
-function SortableLinkBuilder({ id, linkItem }: SortableProps) {
+function SortableLinkBuilder({ id, linkItem, index }: SortableProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -19,7 +20,7 @@ function SortableLinkBuilder({ id, linkItem }: SortableProps) {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <LinkBuilder id={id} linkItem={linkItem} />
+      <LinkBuilder id={id} linkItem={linkItem} index={index} />
     </div>
   );
 }

@@ -1,29 +1,17 @@
 import DropDown from "@/ui/DropDown";
 import { Link, MenuScale } from "iconoir-react";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
 import { SortableProps } from "./SortableLinkBuilder";
-import { EditorContext } from "@/contexts/EditorContextProvider";
 
 interface LinkBuilderProps extends SortableProps {}
 
-function LinkBuilder({ id, linkItem }: LinkBuilderProps) {
-  const { pageData, setPageData } = useContext(EditorContext);
+function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
   const [selectedItem, setSelectedItem] = useState(linkItem);
 
-  useEffect(() => {
-    const newLinks = pageData.links;
-    const choosedItem = pageData.links.findIndex((item) => item.id == id);
-    newLinks[choosedItem] = LinksMenuList.find(
-      (item) => item.item == selectedItem.item
-    );
-    setPageData({ ...pageData, links: newLinks });
-
-    console.log("mobile items: ", newLinks);
-  }, [selectedItem]);
-
   // TODO: Update The Mobile mockup when it updates on the dropdown
+  useEffect(() => {}, []);
 
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
@@ -33,7 +21,7 @@ function LinkBuilder({ id, linkItem }: LinkBuilderProps) {
             <span className="w-4 h-0.5 bg-grey-50"></span>
             <span className="w-4 h-0.5 bg-grey-50"></span>
           </span>
-          <p className="text-grey-50 font-bold">Link #{id}</p>
+          <p className="text-grey-50 font-bold">Link #{index}</p>
         </span>
         <p className="text-grey-50 cursor-pointer hover:text-grey transition duration-300 ease-in-out">
           Remove

@@ -17,10 +17,10 @@ function LinksSection() {
   });
 
   const addNewLink = () => {
-    if (pageData.links.length < LinksMenuList.length) {
-      const newLinks = pageData.links;
+    if (pageData.builders.length < LinksMenuList.length) {
+      const newLinks = pageData.builders;
       newLinks.push(LinksMenuList[newLinks.length]);
-      setPageData({ ...pageData, links: newLinks });
+      setPageData({ ...pageData, builders: newLinks });
     } else {
       setNotif({
         isVisible: true,
@@ -53,7 +53,7 @@ function LinksSection() {
       {/* Get Started */}
 
       <div className="overflow-auto flex flex-col gap-6">
-        {pageData.links.length ? <LinkBuilderArea /> : <GetStartedLayout />}
+        {pageData.builders.length ? <LinkBuilderArea /> : <GetStartedLayout />}
       </div>
 
       {/* Notifications */}

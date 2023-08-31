@@ -7,6 +7,7 @@ interface PageData {
   name: string | null;
   email: string | null;
   links: Array<DropDownItems>;
+  builders: Array<DropDownItems>;
 }
 
 interface EditorContextGen {
@@ -18,8 +19,8 @@ const defaultPageData: PageData = {
   avatar: null,
   name: null,
   email: null,
-  // links: [LinksMenuList[0], LinksMenuList[1], LinksMenuList[7]],
   links: [],
+  builders: [],
 };
 
 export const EditorContext = createContext<EditorContextGen>(null);

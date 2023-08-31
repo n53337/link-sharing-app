@@ -16,7 +16,7 @@ import { EditorContext } from "@/contexts/EditorContextProvider";
 
 function LinkBuilderArea() {
   const { pageData, setPageData } = useContext(EditorContext);
-  const { links } = pageData;
+  const { builders } = pageData;
 
   // const [links, setLinks] = useState([1, 2]);
 
@@ -53,10 +53,18 @@ function LinkBuilderArea() {
       sensors={sensors}
     >
       <div className="flex flex-col gap-4">
-        <SortableContext items={links} strategy={verticalListSortingStrategy}>
+        <SortableContext
+          items={builders}
+          strategy={verticalListSortingStrategy}
+        >
           {/* We need components that use the useSortable hook */}
-          {links.map((item) => (
-            <SortableLinkBuilder key={item.id} id={item.id} linkItem={item} />
+          {builders.map((item, index) => (
+            <SortableLinkBuilder
+              key={item.id}
+              index={index + 1}
+              id={item.id}
+              linkItem={item}
+            />
           ))}
         </SortableContext>
       </div>
