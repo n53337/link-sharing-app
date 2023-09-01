@@ -1,6 +1,7 @@
 import LinksMenuList, {
   LinksMenuListGrey,
 } from "@/components/shared/LinksMenuList";
+import { EditorContext } from "@/contexts/EditorContextProvider";
 import clsx from "clsx";
 import { NavArrowDown, NavArrowUp } from "iconoir-react";
 import {
@@ -9,6 +10,7 @@ import {
   Key,
   ReactElement,
   SetStateAction,
+  useContext,
   useState,
 } from "react";
 
@@ -40,6 +42,7 @@ export default function DropDown({
   setSelectedItem,
   ...rest
 }: DropDownProps) {
+  const { pageData, setPageData } = useContext(EditorContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const dropDownStyles = clsx({
@@ -89,26 +92,41 @@ export default function DropDown({
       {isOpen ? (
         <div className="w-full h-64 overflow-auto flex flex-col divide-y border border-grey-10 rounded-lg shadow-drop-down">
           {LinksMenuListGrey.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center gap-1 px-4 py-3 cursor-pointer hover:bg-purple-10 transition duration-300 ease-in-out"
-              onClick={() => {
-                setSelectedItem(item);
-                setIsOpen(false);
-              }}
-            >
-              {item.icon}
-              <p
-                className={`font-normal pl-1 ${
-                  selectedItem?.id == item.id ? "text-purple" : "text-grey"
-                }`}
-              >
-                {item.item}
-              </p>
-              {selectedItem?.id == item.id ? (
-                <p className="font-normal text-purple">(selected)</p>
-              ) : null}
-            </div>
+            <>
+              {!pageData.builders.some(
+                (builder) => builder.linkId == item.id
+              ) || selectedItem?.id == item.id ? (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-1 px-4 py-3 cursor-pointer hover:bg-purple-10 transition duration-300 ease-in-out"
+                  onClick={() => {
+                    setSelectedItem(item);
+                    setIsOpen(false);
+                  }}
+                >
+                  {item.icon}
+                  <p
+                    className={`font-normal pl-1 ${
+                      selectedItem?.id == item.id ? "text-purple" : "text-grey"
+                    }`}
+                  >
+                    {item.item}
+                  </p>
+                  {selectedItem?.id == item.id ? (
+                    <p className="font-normal text-purple">(selected)</p>
+                  ) : null}
+                </div>
+              ) : (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-1 px-4 py-3 cursor-not-allowed hover:bg-purple-10 transition duration-300 ease-in-out"
+                >
+                  {item.icon}
+                  <p className={`font-normal pl-1 text-grey-50`}>{item.item}</p>
+                  <p className="font-normal text-grey-50">- already selected</p>
+                </div>
+              )}
+            </>
           ))}
         </div>
       ) : null}

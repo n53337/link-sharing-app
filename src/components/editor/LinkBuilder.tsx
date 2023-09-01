@@ -35,6 +35,7 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
   };
 
   // TODO: SHOW ALL ELEMENTS BUT THOSE AREN'T AVAILABLE DISABLE THEM
+  // TODO: disable input when no item selected
 
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
