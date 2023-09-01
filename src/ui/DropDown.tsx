@@ -1,3 +1,6 @@
+import LinksMenuList, {
+  LinksMenuListGrey,
+} from "@/components/shared/LinksMenuList";
 import clsx from "clsx";
 import { NavArrowDown, NavArrowUp } from "iconoir-react";
 import {
@@ -24,8 +27,8 @@ interface DropDownProps extends ComponentProps<"div"> {
   disabled?: boolean;
   placeHolder: string;
   dropDownItems: Array<DropDownItems>;
-  selectedItem: DropDownItems;
-  setSelectedItem: Dispatch<SetStateAction<DropDownItems>>;
+  selectedItem: DropDownItems | null;
+  setSelectedItem: Dispatch<SetStateAction<DropDownItems | null>>;
 }
 
 export default function DropDown({
@@ -66,7 +69,7 @@ export default function DropDown({
       >
         {selectedItem ? (
           <span className="absolute top-4 left-4">
-            {dropDownItems.find((e) => e.id == selectedItem.id)?.icon}
+            {LinksMenuListGrey.find((e) => e.id == selectedItem.id)?.icon}
           </span>
         ) : (
           <span className="absolute top-4 left-4">{icon}</span>
@@ -75,7 +78,7 @@ export default function DropDown({
         {!selectedItem ? (
           <p>{placeHolder}</p>
         ) : (
-          <p>{dropDownItems.find((e) => e.id == selectedItem.id)?.item}</p>
+          <p>{LinksMenuListGrey.find((e) => e.id == selectedItem.id)?.item}</p>
         )}
         {isOpen ? (
           <NavArrowUp {...dropDownNavIconProps} />
@@ -85,12 +88,11 @@ export default function DropDown({
       </div>
       {isOpen ? (
         <div className="w-full h-64 overflow-auto flex flex-col divide-y border border-grey-10 rounded-lg shadow-drop-down">
-          {dropDownItems.map((item) => (
+          {LinksMenuListGrey.map((item) => (
             <div
               key={item.id}
               className="flex items-center gap-1 px-4 py-3 cursor-pointer hover:bg-purple-10 transition duration-300 ease-in-out"
               onClick={() => {
-                console.log("SELECTED: ", item);
                 setSelectedItem(item);
                 setIsOpen(false);
               }}
@@ -98,12 +100,12 @@ export default function DropDown({
               {item.icon}
               <p
                 className={`font-normal pl-1 ${
-                  selectedItem.id == item.id ? "text-purple" : "text-grey"
+                  selectedItem?.id == item.id ? "text-purple" : "text-grey"
                 }`}
               >
                 {item.item}
               </p>
-              {selectedItem.id == item.id ? (
+              {selectedItem?.id == item.id ? (
                 <p className="font-normal text-purple">(selected)</p>
               ) : null}
             </div>

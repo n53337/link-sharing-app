@@ -1,4 +1,4 @@
-import DropDown from "@/ui/DropDown";
+import DropDown, { DropDownItems } from "@/ui/DropDown";
 import { Link, MenuScale } from "iconoir-react";
 import { useContext, useEffect, useState } from "react";
 import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
@@ -8,13 +8,22 @@ import { EditorContext } from "@/contexts/EditorContextProvider";
 
 interface LinkBuilderProps extends SortableProps {}
 
-function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
+function LinkBuilder({ id, index }: LinkBuilderProps) {
   const { pageData, setPageData } = useContext(EditorContext);
 
-  const [selectedItem, setSelectedItem] = useState(linkItem);
+  const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(null);
 
   // TODO: Update The Mobile mockup when it updates on the dropdown
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // comming: [{id:123, linkId:'p_1', input:''}]
+    const newBuilders = pageData.builders;
+    const builderIndex = newBuilders.findIndex((e) => e.id == id);
+    newBuilders[builderIndex] = {
+      ...newBuilders[builderIndex],
+      linkId: selectedItem?.id,
+    };
+    setPageData({ ...pageData, builders: newBuilders });
+  }, [selectedItem]);
 
   const handleBuilderRemove = () => {
     const newPageBuilders = pageData.builders;
@@ -24,6 +33,8 @@ function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
     newPageBuilders.splice(builderIndex, 1);
     setPageData({ ...pageData, builders: newPageBuilders });
   };
+
+  // TODO: SHOW ALL ELEMENTS BUT THOSE AREN'T AVAILABLE DISABLE THEM
 
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
@@ -49,7 +60,10 @@ function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
           <DropDown
             icon={<MenuScale />}
             placeHolder="Choose a platform"
-            dropDownItems={LinksMenuListGrey}
+            dropDownItems={LinksMenuListGrey.filter(
+              (link) =>
+                !pageData.builders.some((builder) => builder.linkId == link.id)
+            )}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
           />
@@ -61,8 +75,10 @@ function LinkBuilder({ id, linkItem, index }: LinkBuilderProps) {
             type="text"
             icon={<Link />}
             placeholder={
-              LinksMenuList.find((e) => e.id == selectedItem.id)
-                ?.inputPlaceHolder
+              selectedItem
+                ? LinksMenuList.find((e) => e.id == selectedItem.id)
+                    ?.inputPlaceHolder
+                : "link placeholder"
             }
           />
         </div>

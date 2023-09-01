@@ -18,8 +18,10 @@ function LinksSection() {
 
   const addNewLink = () => {
     if (pageData.builders.length < LinksMenuList.length) {
+      // const newLinks = pageData.builders;
       const newLinks = pageData.builders;
-      newLinks.push(LinksMenuList[newLinks.length]);
+      // newLinks.push(LinksMenuList[newLinks.length]);
+      newLinks.push({ id: Date.now(), linkId: null, input: "" });
       setPageData({ ...pageData, builders: newLinks });
     } else {
       setNotif({

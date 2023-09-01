@@ -1,13 +1,17 @@
-import LinksMenuList from "@/components/shared/LinksMenuList";
 import { DropDownItems } from "@/ui/DropDown";
 import { Dispatch, Key, SetStateAction, createContext, useState } from "react";
 
+type BuildersType = {
+  id: number;
+  linkId: Key | null | undefined;
+  input: string;
+};
 interface PageData {
   avatar: string | null;
   name: string | null;
   email: string | null;
   links: Array<DropDownItems>;
-  builders: Array<DropDownItems>;
+  builders: Array<BuildersType>;
 }
 
 interface EditorContextGen {
