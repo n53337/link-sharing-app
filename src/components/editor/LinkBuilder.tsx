@@ -13,9 +13,10 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
 
   const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(null);
 
-  // TODO: Update The Mobile mockup when it updates on the dropdown
   useEffect(() => {
-    // comming: [{id:123, linkId:'p_1', input:''}]
+    console.log("builders", pageData.builders);
+    console.log("links", pageData.links);
+
     const newBuilders = pageData.builders;
     const builderIndex = newBuilders.findIndex((e) => e.id == id);
     newBuilders[builderIndex] = {
@@ -23,15 +24,23 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       linkId: selectedItem?.id,
     };
 
+    // TODO: fix first link added no changing
+
     const newLinks = newBuilders.map((builder) =>
       LinksMenuList.find((link) => link.id == builder.linkId)
     );
-    console.log("new links", newLinks);
+
+    const newLinksList: Array<DropDownItems | undefined> = [];
+    for (let i = 0; i < newLinks.length; i++) {
+      if (newLinks[i]) {
+        newLinksList.push(newLinks[i]);
+      }
+    }
 
     setPageData({
       ...pageData,
       builders: newBuilders,
-      links: !newLinks.includes(undefined) ? newLinks : pageData.links,
+      links: newLinksList,
     });
   }, [selectedItem]);
 
@@ -41,10 +50,25 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       (builder) => builder.id == id
     );
     newPageBuilders.splice(builderIndex, 1);
-    setPageData({ ...pageData, builders: newPageBuilders });
-  };
 
-  // TODO: DRAG AND DROP PROBLEMS
+    const newLinks = newPageBuilders.map((builder) =>
+      LinksMenuList.find((link) => link.id == builder.linkId)
+    );
+
+    const newLinksList: Array<DropDownItems | undefined> = [];
+
+    for (let i = 0; i < newLinks.length; i++) {
+      if (newLinks[i]) {
+        newLinksList.push(newLinks[i]);
+      }
+    }
+
+    setPageData({
+      ...pageData,
+      builders: newPageBuilders,
+      links: newLinksList,
+    });
+  };
 
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">

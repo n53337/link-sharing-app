@@ -25,10 +25,10 @@ function LinkBuilderArea() {
 
     if (active.id !== over.id) {
       setPageData((pageData) => {
-        const activeIndex = pageData.links.findIndex(
+        const activeIndex = pageData.builders.findIndex(
           (item) => item.id == active.id
         );
-        const overIndex = pageData.links.findIndex(
+        const overIndex = pageData.builders.findIndex(
           (item) => item.id == over.id
         );
         const newPageData = {

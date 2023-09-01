@@ -15,3 +15,4 @@
 [todo] Handle App Notification
 [todo] App Logic
 [todo] AppSpinner custom message
+[todo] Image picker limit with error msg
