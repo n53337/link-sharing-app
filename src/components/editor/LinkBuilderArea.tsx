@@ -13,6 +13,8 @@ import {
 import { useContext } from "react";
 import SortableLinkBuilder from "./SortableLinkBuilder";
 import { EditorContext } from "@/contexts/EditorContextProvider";
+import { DropDownItems } from "@/ui/DropDown";
+import LinksMenuList from "../shared/LinksMenuList";
 
 function LinkBuilderArea() {
   const { pageData, setPageData } = useContext(EditorContext);
@@ -28,12 +30,32 @@ function LinkBuilderArea() {
         const activeIndex = pageData.builders.findIndex(
           (item) => item.id == active.id
         );
+
         const overIndex = pageData.builders.findIndex(
           (item) => item.id == over.id
         );
+
+        const newBuilders = arrayMove(
+          pageData.builders,
+          activeIndex,
+          overIndex
+        );
+
+        const newLinks = newBuilders.map((builder) =>
+          LinksMenuList.find((link) => link.id == builder.linkId)
+        );
+
+        const newLinksList: Array<DropDownItems | undefined> = [];
+        for (let i = 0; i < newLinks.length; i++) {
+          if (newLinks[i]) {
+            newLinksList.push(newLinks[i]);
+          }
+        }
+
         const newPageData = {
           ...pageData,
-          links: arrayMove(pageData.links, activeIndex, overIndex),
+          builders: newBuilders,
+          links: newLinksList,
         };
         return newPageData;
       });
@@ -42,7 +64,7 @@ function LinkBuilderArea() {
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { delay: 150, tolerance: 10 },
+      activationConstraint: { delay: 140, tolerance: 10 },
     })
   );
 

@@ -14,17 +14,13 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
   const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(null);
 
   useEffect(() => {
-    console.log("builders", pageData.builders);
-    console.log("links", pageData.links);
-
     const newBuilders = pageData.builders;
     const builderIndex = newBuilders.findIndex((e) => e.id == id);
+
     newBuilders[builderIndex] = {
       ...newBuilders[builderIndex],
       linkId: selectedItem?.id,
     };
-
-    // TODO: fix first link added no changing
 
     const newLinks = newBuilders.map((builder) =>
       LinksMenuList.find((link) => link.id == builder.linkId)
@@ -49,6 +45,7 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
     const builderIndex = newPageBuilders.findIndex(
       (builder) => builder.id == id
     );
+
     newPageBuilders.splice(builderIndex, 1);
 
     const newLinks = newPageBuilders.map((builder) =>
@@ -71,7 +68,7 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
   };
 
   return (
-    <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
+    <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing active:shadow-btn">
       <div className="flex justify-between items-center">
         <span className="flex items-center gap-2">
           <span className="flex flex-col gap-1">

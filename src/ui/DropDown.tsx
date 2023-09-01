@@ -92,7 +92,7 @@ export default function DropDown({
       {isOpen ? (
         <div className="w-full h-64 overflow-auto flex flex-col divide-y border border-grey-10 rounded-lg shadow-drop-down">
           {LinksMenuListGrey.map((item) => (
-            <>
+            <div key={item.id}>
               {!pageData.builders.some(
                 (builder) => builder.linkId == item.id
               ) || selectedItem?.id == item.id ? (
@@ -126,7 +126,7 @@ export default function DropDown({
                   <p className="font-normal text-grey-50">- already selected</p>
                 </div>
               )}
-            </>
+            </div>
           ))}
         </div>
       ) : null}
