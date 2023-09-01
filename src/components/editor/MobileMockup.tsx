@@ -83,7 +83,7 @@ function MobileMockup() {
               <div className="flex flex-col gap-6 max-h-72 overflow-auto">
                 {links.length
                   ? links.map((item, index) => (
-                      <div className="w-60 h-12" key={item.id}>
+                      <div className="w-60 h-12" key={index}>
                         <LinksPreviewList
                           item={item}
                           to="https://github.com/n53337"

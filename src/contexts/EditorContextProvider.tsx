@@ -10,7 +10,7 @@ interface PageData {
   avatar: string | null;
   name: string | null;
   email: string | null;
-  links: Array<DropDownItems>;
+  links: Array<DropDownItems | undefined>;
   builders: Array<BuildersType>;
 }
 

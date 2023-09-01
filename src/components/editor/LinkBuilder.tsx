@@ -22,7 +22,17 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       ...newBuilders[builderIndex],
       linkId: selectedItem?.id,
     };
-    setPageData({ ...pageData, builders: newBuilders });
+
+    const newLinks = newBuilders.map((builder) =>
+      LinksMenuList.find((link) => link.id == builder.linkId)
+    );
+    console.log("new links", newLinks);
+
+    setPageData({
+      ...pageData,
+      builders: newBuilders,
+      links: !newLinks.includes(undefined) ? newLinks : pageData.links,
+    });
   }, [selectedItem]);
 
   const handleBuilderRemove = () => {
@@ -34,8 +44,7 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
     setPageData({ ...pageData, builders: newPageBuilders });
   };
 
-  // TODO: SHOW ALL ELEMENTS BUT THOSE AREN'T AVAILABLE DISABLE THEM
-  // TODO: disable input when no item selected
+  // TODO: DRAG AND DROP PROBLEMS
 
   return (
     <div className="w-full bg-grey-light rounded-lg p-6 flex flex-col gap-4 cursor-grab active:cursor-grabbing">
