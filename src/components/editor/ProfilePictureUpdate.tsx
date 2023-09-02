@@ -41,18 +41,20 @@ function ProfilePictureUpdate() {
           }}
         >
           <div
-            className={`p-12 rounded-lg transition duration-300 ease-in-out ${
-              selectedImage ? "hover:bg-[rgba(0,0,0,.6)]" : "hover:opacity-60"
+            className={`rounded-lg transition duration-300 ease-in-out ${
+              selectedImage
+                ? "bg-[rgba(0,0,0,.5)] hover:bg-[rgba(0,0,0,.75)]"
+                : "hover:opacity-60"
             }`}
           >
             <input
               type="file"
-              className="absolute top-0 bottom-0 left-0 right-0 opacity-0 cursor-pointer"
+              className="absolute top-0 bottom-0 left-0 right-0 opacity-0 cursor-pointer z-10"
               onChange={handleImageImport}
               accept="image/*"
             />
             {!selectedImage ? (
-              <span className="flex flex-col justify-center items-center gap-2">
+              <span className="flex p-12 flex-col justify-center items-center gap-2">
                 <AddMediaImage
                   width={32}
                   height={32}
@@ -64,7 +66,7 @@ function ProfilePictureUpdate() {
                 </p>
               </span>
             ) : (
-              <span className="flex flex-col justify-center items-center gap-2 opacity-0 hover:opacity-100 transition duration-300 ease-in-out">
+              <span className="flex p-12 flex-col justify-center items-center gap-2 transition duration-300 ease-in-out">
                 <MediaImage
                   width={32}
                   height={32}

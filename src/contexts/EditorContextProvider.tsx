@@ -8,7 +8,8 @@ type BuildersType = {
 };
 interface PageData {
   avatar: string | null;
-  name: string | null;
+  firstName: string | null;
+  lastName: string | null;
   email: string | null;
   links: Array<DropDownItems | undefined>;
   builders: Array<BuildersType>;
@@ -21,7 +22,8 @@ interface EditorContextGen {
 
 const defaultPageData: PageData = {
   avatar: null,
-  name: null,
+  firstName: null,
+  lastName: null,
   email: null,
   links: [],
   builders: [],

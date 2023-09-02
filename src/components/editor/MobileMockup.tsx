@@ -5,7 +5,7 @@ import LinksMenuList from "../shared/LinksMenuList";
 
 function MobileMockup() {
   const { pageData, setPageData } = useContext(EditorContext);
-  const { avatar, email, name, links, builders } = pageData;
+  const { avatar, email, firstName, lastName, links, builders } = pageData;
 
   const newLinkRef = useRef(null);
 
@@ -57,18 +57,20 @@ function MobileMockup() {
                     <img
                       className="w-full h-full object-cover"
                       src={avatar}
-                      alt={name ?? "avatar"}
+                      alt={firstName ?? "avatar"}
                     />
                   ) : null}
                 </div>
 
                 <div
                   className={`flex flex-col items-center justify-center ${
-                    name && email ? "" : "gap-4"
+                    (firstName || lastName) && email ? "" : "gap-4"
                   }`}
                 >
-                  {name ? (
-                    <p className="text-grey font-semibold text-lg">{name}</p>
+                  {firstName || lastName ? (
+                    <p className="text-grey font-semibold text-lg">
+                      {firstName + " " + lastName}
+                    </p>
                   ) : (
                     <div className="rounded-full bg-grey-placeholder w-40 h-4"></div>
                   )}
