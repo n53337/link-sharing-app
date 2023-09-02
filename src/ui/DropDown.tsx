@@ -20,6 +20,7 @@ export interface DropDownItems {
   arrowColor?: string;
   border?: string;
   inputPlaceHolder?: string;
+  linkHref?: string;
 }
 
 interface DropDownProps extends ComponentProps<"div"> {

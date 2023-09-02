@@ -5,7 +5,7 @@ import LinksMenuList from "../shared/LinksMenuList";
 
 function MobileMockup() {
   const { pageData, setPageData } = useContext(EditorContext);
-  const { avatar, email, name, links } = pageData;
+  const { avatar, email, name, links, builders } = pageData;
 
   const newLinkRef = useRef(null);
 
@@ -84,10 +84,7 @@ function MobileMockup() {
                 {links.length
                   ? links.map((item, index) => (
                       <div className="w-60 h-12" key={index}>
-                        <LinksPreviewList
-                          item={item}
-                          to="https://github.com/n53337"
-                        />
+                        <LinksPreviewList item={item} to={item?.linkHref} />
                       </div>
                     ))
                   : Array.from({ length: 4 }, (v, i) => i).map((item) => (

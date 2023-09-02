@@ -10,7 +10,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import SortableLinkBuilder from "./SortableLinkBuilder";
 import { EditorContext } from "@/contexts/EditorContextProvider";
 import { DropDownItems } from "@/ui/DropDown";
@@ -21,6 +21,14 @@ function LinkBuilderArea() {
   const { builders } = pageData;
 
   // const [links, setLinks] = useState([1, 2]);
+
+  const newLinkRef = useRef(null);
+
+  useEffect(() => {
+    if (newLinkRef.current) {
+      newLinkRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [pageData]);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;

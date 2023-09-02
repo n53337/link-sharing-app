@@ -18,7 +18,7 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
   const [linkInput, setLinkInput] = useState<string>("");
   const [linkInputError, setLinkInputError] = useState<string>("");
 
-  // Add New Builder
+  // Handle Builder selected item change
   useEffect(() => {
     const newBuilders = pageData.builders;
     const builderIndex = newBuilders.findIndex((e) => e.id == id);
@@ -114,10 +114,42 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
 
     if (!e.target.value) {
       setLinkInputError(LinkInputErrors.EMPTY_URL);
+      const newLinks = pageData.links;
+      const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
+      const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
+
+      newLinks[linkIndex] = {
+        ...newLinks[linkIndex],
+        linkHref: "",
+      };
+
+      setPageData({ ...pageData, links: newLinks });
     } else if (!isUrlValid()) {
       setLinkInputError(LinkInputErrors.WRONG_URL_PATTERN);
+      const newLinks = pageData.links;
+      const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
+      const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
+
+      newLinks[linkIndex] = {
+        ...newLinks[linkIndex],
+        linkHref: "",
+      };
+
+      setPageData({ ...pageData, links: newLinks });
     } else {
       setLinkInputError("");
+
+      // Active and Desactivate links
+      const newLinks = pageData.links;
+      const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
+      const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
+
+      newLinks[linkIndex] = {
+        ...newLinks[linkIndex],
+        linkHref: e.target.value,
+      };
+
+      setPageData({ ...pageData, links: newLinks });
     }
   };
 
