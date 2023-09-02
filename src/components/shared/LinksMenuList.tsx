@@ -28,7 +28,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "GitHub",
     bgColor: "#1A1A1A",
-    inputPlaceHolder: "e.g. https://github.com/username",
+    inputPlaceHolder: "https://www.github.com/username",
   },
   {
     id: "p_2",
@@ -37,7 +37,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     bgColor: "#FFF",
     arrowColor: "#737373",
     border: "#D9D9D9",
-    inputPlaceHolder: "e.g. https://www.frontendmentor.io/profile/username",
+    inputPlaceHolder: "https://www.frontendmentor.io/profile/username",
   },
   {
     id: "p_3",
@@ -52,7 +52,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Twitter",
     bgColor: "#43B7E9",
-    inputPlaceHolder: "e.g. https://www.x.com/username",
+    inputPlaceHolder: "https://www.x.com/username",
   },
   {
     id: "p_4",
@@ -67,7 +67,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Linkedin",
     bgColor: "#2D68FF",
-    inputPlaceHolder: "e.g. https://www.linkedin.com/i/username",
+    inputPlaceHolder: "https://www.linkedin.com/in/username",
   },
   {
     id: "p_5",
@@ -82,7 +82,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Youtube",
     bgColor: "#EE3939",
-    inputPlaceHolder: "e.g. https://www.youtube.com/username",
+    inputPlaceHolder: "https://www.youtube.com/username",
   },
   {
     id: "p_6",
@@ -97,7 +97,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Facebook",
     bgColor: "#2442AC",
-    inputPlaceHolder: "e.g. https://www.facebook.com/username",
+    inputPlaceHolder: "https://www.facebook.com/username",
   },
   {
     id: "p_7",
@@ -112,14 +112,14 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Twitch",
     bgColor: "#EE3FC8",
-    inputPlaceHolder: "e.g. https://www.twitch.tv/username",
+    inputPlaceHolder: "https://www.twitch.tv/username",
   },
   {
     id: "p_8",
     icon: <img src={devto} />,
     item: "Dev.to",
     bgColor: "#333333",
-    inputPlaceHolder: "e.g. https://dev.to/username",
+    inputPlaceHolder: "https://www.dev.to/username",
   },
   {
     id: "p_9",
@@ -134,7 +134,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Codewars",
     bgColor: "#8A1A50",
-    inputPlaceHolder: "e.g. https://codewars.com/users/username",
+    inputPlaceHolder: "https://www.codewars.com/users/username",
   },
   {
     id: "p_10",
@@ -149,7 +149,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "freeCodeCamp",
     bgColor: "#302267",
-    inputPlaceHolder: "e.g. https://freecodecamp.org/username",
+    inputPlaceHolder: "https://www.freecodecamp.org/username",
   },
   {
     id: "p_11",
@@ -164,7 +164,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Gitlab",
     bgColor: "#EB4925",
-    inputPlaceHolder: "e.g. https://gitlab.com/username",
+    inputPlaceHolder: "https://www.gitlab.com/username",
   },
   {
     id: "p_12",
@@ -179,7 +179,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Hashnode",
     bgColor: "#0330D1",
-    inputPlaceHolder: "e.g. https://hashnode.com/username",
+    inputPlaceHolder: "https://www.hashnode.com/username",
   },
   {
     id: "p_13",
@@ -194,7 +194,7 @@ export const LinksMenuList: Array<DropDownItems> = [
     ),
     item: "Stack Overflow",
     bgColor: "#EC7100",
-    inputPlaceHolder: "e.g. https://stackoverflow.com/users/1111/username",
+    inputPlaceHolder: "https://www.stackoverflow.com/users/username",
   },
 ];
 
@@ -206,7 +206,6 @@ export const LinksMenuListGrey: Array<DropDownItems> = [
     icon: <img src={github} />,
     item: "GitHub",
     bgColor: "#1A1A1A",
-    inputPlaceHolder: "e.g. https://github.com/n53337",
   },
   {
     id: "p_2",

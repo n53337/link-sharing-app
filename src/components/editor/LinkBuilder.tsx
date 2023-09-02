@@ -1,10 +1,12 @@
 import DropDown, { DropDownItems } from "@/ui/DropDown";
-import { Link, MenuScale } from "iconoir-react";
+import { InputField, Link, MenuScale } from "iconoir-react";
 import { useContext, useEffect, useState } from "react";
 import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
 import { SortableProps } from "./SortableLinkBuilder";
 import { EditorContext } from "@/contexts/EditorContextProvider";
+import { BRAND_NAME } from "@/helpers/constants";
+import { LinkInputErrors } from "@/helpers/linkInputErrors";
 
 interface LinkBuilderProps extends SortableProps {}
 
@@ -13,6 +15,10 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
 
   const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(null);
 
+  const [linkInput, setLinkInput] = useState<string>("");
+  const [linkInputError, setLinkInputError] = useState<string>("");
+
+  // Add New Builder
   useEffect(() => {
     const newBuilders = pageData.builders;
     const builderIndex = newBuilders.findIndex((e) => e.id == id);
@@ -38,8 +44,12 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       builders: newBuilders,
       links: newLinksList,
     });
+
+    // reset link input
+    setLinkInput("");
   }, [selectedItem]);
 
+  // Remove builder
   const handleBuilderRemove = () => {
     const newPageBuilders = pageData.builders;
     const builderIndex = newPageBuilders.findIndex(
@@ -65,6 +75,50 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       builders: newPageBuilders,
       links: newLinksList,
     });
+  };
+
+  // manage link input
+  const handleLinkInput = (e: any) => {
+    setLinkInput(e.target.value);
+
+    const urlPlaceHolder = LinksMenuList.find(
+      (e) => e.id == selectedItem?.id
+    )?.inputPlaceHolder;
+
+    const isUrlValid = (): boolean => {
+      const pattern = new RegExp(
+        `^${urlPlaceHolder
+          ?.replace("/username", "")
+          .replace(/\//g, "\\/")}\/[^*]`
+      );
+      const cleanLinkPattern = new RegExp(
+        `^${urlPlaceHolder
+          ?.replace("/username", "")
+          .replace("https://www.", "")
+          .replace(/\//g, "\\/")}\/[^*]`
+      );
+      const noWwwPattern = new RegExp(
+        `^${urlPlaceHolder
+          ?.replace("/username", "")
+          .replace("www.", "")
+          .replace(/\//g, "\\/")}\/[^*]`
+      );
+
+      const isValidLink =
+        pattern.test(e.target.value) ||
+        cleanLinkPattern.test(e.target.value) ||
+        noWwwPattern.test(e.target.value);
+
+      return isValidLink;
+    };
+
+    if (!e.target.value) {
+      setLinkInputError(LinkInputErrors.EMPTY_URL);
+    } else if (!isUrlValid()) {
+      setLinkInputError(LinkInputErrors.WRONG_URL_PATTERN);
+    } else {
+      setLinkInputError("");
+    }
   };
 
   return (
@@ -103,13 +157,19 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
         <div className="flex flex-col gap-1">
           <label className="text-grey-50 text-sm">Link</label>
           <Input
+            error={Boolean(linkInputError)}
+            errorMessage={linkInputError}
+            value={linkInput}
+            onChange={handleLinkInput}
+            disabled={!selectedItem}
             type="text"
             icon={<Link />}
             placeholder={
               selectedItem
-                ? LinksMenuList.find((e) => e.id == selectedItem.id)
+                ? "e.g. " +
+                  LinksMenuList.find((e) => e.id == selectedItem.id)
                     ?.inputPlaceHolder
-                : "link placeholder"
+                : `e.g. ${BRAND_NAME}.com/username`
             }
           />
         </div>

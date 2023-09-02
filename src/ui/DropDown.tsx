@@ -1,6 +1,4 @@
-import LinksMenuList, {
-  LinksMenuListGrey,
-} from "@/components/shared/LinksMenuList";
+import { LinksMenuListGrey } from "@/components/shared/LinksMenuList";
 import { EditorContext } from "@/contexts/EditorContextProvider";
 import clsx from "clsx";
 import { NavArrowDown, NavArrowUp } from "iconoir-react";
@@ -42,7 +40,7 @@ export default function DropDown({
   setSelectedItem,
   ...rest
 }: DropDownProps) {
-  const { pageData, setPageData } = useContext(EditorContext);
+  const { pageData } = useContext(EditorContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const dropDownStyles = clsx({
