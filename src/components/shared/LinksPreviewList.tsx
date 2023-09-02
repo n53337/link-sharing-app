@@ -10,7 +10,8 @@ interface LinksPreviewListProps extends ComponentProps<"a"> {
 const LinksPreviewList = ({ item, to }: LinksPreviewListProps) => {
   return (
     <a
-      href={`${to ?? "#"}`}
+      href={`https://${to ?? "#"}`}
+      onClick={!to ? (e) => e.preventDefault() : () => {}}
       className={`w-full lg:max-w-xs rounded-lg flex items-center justify-between gap-2 px-6 py-4 border hover:opacity-80 transition duration-300 ease-in-out cursor-pointer ${
         !to ? "opacity-50 cursor-not-allowed" : ""
       }`}

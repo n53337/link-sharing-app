@@ -146,7 +146,7 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
 
       newLinks[linkIndex] = {
         ...newLinks[linkIndex],
-        linkHref: e.target.value,
+        linkHref: e.target.value.replace("https://", ""),
       };
 
       setPageData({ ...pageData, links: newLinks });
