@@ -27,9 +27,9 @@ function CustomizeSection({ activeTab }: CustomizeSectionProps) {
         <div className="bg-white border-t border-t-grey-10 p-4 flex items-center">
           <span className="hidden md:block w-full"></span>
           <div className="w-full md:w-fit flex gap-2">
-            <Button variant="secondary" size="base">
+            {/* <Button variant="secondary" size="base">
               Save
-            </Button>
+            </Button> */}
             <Button variant="primary" size="base">
               Publish
             </Button>

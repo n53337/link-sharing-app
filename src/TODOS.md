@@ -18,3 +18,4 @@
 [todo] Image picker limit with error msg
 [todo] fix d&d drag bugs
 [todo] disable buttons until links is saved
+[todo] profile image preview placeholder

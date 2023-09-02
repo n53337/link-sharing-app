@@ -1,5 +1,5 @@
 import DropDown, { DropDownItems } from "@/ui/DropDown";
-import { InputField, Link, MenuScale } from "iconoir-react";
+import { Link, MenuScale } from "iconoir-react";
 import { useContext, useEffect, useState } from "react";
 import LinksMenuList, { LinksMenuListGrey } from "../shared/LinksMenuList";
 import Input from "@/ui/Input";
@@ -112,11 +112,12 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       return isValidLink;
     };
 
+    const newLinks = pageData.links;
+    const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
+    const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
+
     if (!e.target.value) {
       setLinkInputError(LinkInputErrors.EMPTY_URL);
-      const newLinks = pageData.links;
-      const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
-      const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
 
       newLinks[linkIndex] = {
         ...newLinks[linkIndex],
@@ -126,9 +127,6 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       setPageData({ ...pageData, links: newLinks });
     } else if (!isUrlValid()) {
       setLinkInputError(LinkInputErrors.WRONG_URL_PATTERN);
-      const newLinks = pageData.links;
-      const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
-      const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
 
       newLinks[linkIndex] = {
         ...newLinks[linkIndex],
@@ -140,10 +138,6 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       setLinkInputError("");
 
       // Active and Desactivate links
-      const newLinks = pageData.links;
-      const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
-      const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
-
       newLinks[linkIndex] = {
         ...newLinks[linkIndex],
         linkHref: e.target.value.replace("https://", ""),
