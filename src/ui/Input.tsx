@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { CheckCircle, WarningTriangle } from "iconoir-react";
 import { ComponentProps, ReactElement } from "react";
 
 interface InputProps extends ComponentProps<"input"> {
@@ -29,7 +30,7 @@ const Input = ({
   });
 
   const inputErrorStyles = clsx({
-    "font-normal text-sm": true,
+    "font-normal text-sm flex items-center gap-1": true,
     "text-green-700": errorType == "success",
     "text-yellow-600": errorType == "warning",
     "text-error": !errorType,
@@ -40,7 +41,14 @@ const Input = ({
       {icon ? <span className="absolute top-4 left-4">{icon}</span> : null}
       <input {...rest} className={inputStyles} />
       {errorMessage && error ? (
-        <span className={inputErrorStyles}>{errorMessage}</span>
+        <span className={inputErrorStyles}>
+          {errorType == "success" ? (
+            <CheckCircle strokeWidth={1.5} />
+          ) : (
+            <WarningTriangle strokeWidth={1.5} />
+          )}
+          <span>{errorMessage}</span>
+        </span>
       ) : null}
     </div>
   );

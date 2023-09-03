@@ -1,5 +1,6 @@
 import { EditorContext } from "@/contexts/EditorContextProvider";
-import { isUsernameValid } from "@/services/app";
+import { isEmailValid } from "@/helpers";
+import { isUsernameValid, isUsernameValid } from "@/services/app";
 import Input from "@/ui/Input";
 import { useContext, useEffect, useState } from "react";
 
@@ -26,27 +27,36 @@ function ProfileEditForm() {
   }, [firstName, lastName, email]);
 
   const handleUsernameValidation = async (e: any) => {
-    isUsernameValid();
-    setUsername(e.target.value);
-    // TODO: Realime username validation
-    if (e.target.value.length < 5) {
+    const usr = e.target.value;
+    setUsername(usr);
+    setUsernameValidation({
+      error: false,
+      type: "",
+      message: "",
+    });
+
+    if (usr) {
       setUsernameValidation({
         error: true,
         type: "warning",
         message: "cheking...",
       });
-    } else if (e.target.value.length < 10) {
-      setUsernameValidation({
-        error: true,
-        type: "success",
-        message: "this username is valid",
-      });
-    } else {
-      setUsernameValidation({
-        error: true,
-        type: "",
-        message: "non valid username",
-      });
+
+      const isValid = await isUsernameValid(usr);
+
+      if (isValid) {
+        setUsernameValidation({
+          error: true,
+          type: "success",
+          message: `${usr} is valid`,
+        });
+      } else {
+        setUsernameValidation({
+          error: true,
+          type: "",
+          message: `${usr} is already exist.`,
+        });
+      }
     }
   };
 

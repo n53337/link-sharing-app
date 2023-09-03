@@ -13,9 +13,9 @@
 [x] register user to DB
 [x] manage auth state
 [todo] Handle App Notification
-[todo] App Logic
+[doing] App Logic
 [todo] AppSpinner custom message
-[todo] Image picker limit with error msg
+[x] Image picker limit with error msg
 [todo] fix d&d drag bugs
 [todo] disable buttons until links is saved
 [todo] profile image preview placeholder
