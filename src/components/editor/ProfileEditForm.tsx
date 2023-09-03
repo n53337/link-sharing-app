@@ -1,4 +1,5 @@
 import { EditorContext } from "@/contexts/EditorContextProvider";
+import { isUsernameValid } from "@/services/app";
 import Input from "@/ui/Input";
 import { useContext, useEffect, useState } from "react";
 
@@ -8,7 +9,12 @@ function ProfileEditForm() {
   const [firstName, setFirstName] = useState(pageData.firstName ?? "");
   const [lastName, setLastName] = useState(pageData.lastName ?? "");
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState(pageData.email);
+  const [email, setEmail] = useState(pageData.email ?? "");
+  const [usernameValidation, setUsernameValidation] = useState({
+    error: false,
+    type: "",
+    message: "",
+  });
 
   useEffect(() => {
     setPageData({
@@ -18,6 +24,31 @@ function ProfileEditForm() {
       lastName,
     });
   }, [firstName, lastName, email]);
+
+  const handleUsernameValidation = async (e: any) => {
+    isUsernameValid();
+    setUsername(e.target.value);
+    // TODO: Realime username validation
+    if (e.target.value.length < 5) {
+      setUsernameValidation({
+        error: true,
+        type: "warning",
+        message: "cheking...",
+      });
+    } else if (e.target.value.length < 10) {
+      setUsernameValidation({
+        error: true,
+        type: "success",
+        message: "this username is valid",
+      });
+    } else {
+      setUsernameValidation({
+        error: true,
+        type: "",
+        message: "non valid username",
+      });
+    }
+  };
 
   return (
     <div className="bg-grey-light rounded-lg p-8 flex flex-col lg:flex-row lg:items-center gap-4">
@@ -42,7 +73,15 @@ function ProfileEditForm() {
         </div>
         <div className="flex flex-col gap-2 lg:flex-row lg:items-center w-full">
           <label className="text-grey-50 text-sm lg:w-1/3">Username *</label>
-          <Input type="text" placeholder="e.g. john_doe" />
+          <Input
+            type="text"
+            placeholder="e.g. john_doe"
+            value={username}
+            onChange={handleUsernameValidation}
+            error={usernameValidation.error}
+            errorMessage={usernameValidation.message}
+            errorType={usernameValidation.type}
+          />
         </div>
         <div className="flex flex-col gap-2 lg:flex-row lg:items-center w-full">
           <label className="text-grey-50 text-sm lg:w-1/3">

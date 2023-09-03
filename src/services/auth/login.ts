@@ -1,8 +1,4 @@
-import {
-  browserLocalPersistence,
-  setPersistence,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../firebase";
 import {
   AuthErrors,
