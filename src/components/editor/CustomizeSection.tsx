@@ -1,8 +1,6 @@
 import Button from "@/ui/Button";
 import ProfileSection from "./ProfileSection";
 import LinksSection from "./LinksSection";
-import { useContext } from "react";
-import { EditorContext } from "@/contexts/EditorContextProvider";
 
 interface CustomizeSectionProps {
   activeTab: number;

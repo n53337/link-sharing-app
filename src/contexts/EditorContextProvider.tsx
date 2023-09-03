@@ -10,6 +10,7 @@ interface PageData {
   avatar: string | null;
   firstName: string | null;
   lastName: string | null;
+  username: string | null;
   email: string | null;
   links: Array<DropDownItems | undefined>;
   builders: Array<BuildersType>;
@@ -24,6 +25,7 @@ const defaultPageData: PageData = {
   avatar: null,
   firstName: null,
   lastName: null,
+  username: null,
   email: null,
   links: [],
   builders: [],

@@ -4,10 +4,13 @@ import LinksPreviewList from "../shared/LinksPreviewList";
 import LinksMenuList from "../shared/LinksMenuList";
 
 function MobileMockup() {
-  const { pageData, setPageData } = useContext(EditorContext);
+  const { pageData } = useContext(EditorContext);
   const { avatar, email, firstName, lastName, links, builders } = pageData;
 
   const newLinkRef = useRef(null);
+
+  console.log("MOBILE", pageData.links);
+  console.log("BUILD", pageData.builders);
 
   useEffect(() => {
     if (newLinkRef.current) {
@@ -86,7 +89,11 @@ function MobileMockup() {
                 {links.length
                   ? links.map((item, index) => (
                       <div className="w-60 h-12" key={index}>
-                        <LinksPreviewList item={item} to={item?.linkHref} />
+                        <p>{item.input}</p>
+                        <LinksPreviewList
+                          item={item}
+                          to={builders.find((e) => e.linkId == item?.id)?.input}
+                        />
                       </div>
                     ))
                   : Array.from({ length: 4 }, (v, i) => i).map((item) => (

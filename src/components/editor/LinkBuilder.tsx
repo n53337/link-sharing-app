@@ -15,7 +15,11 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
 
   const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(null);
 
-  const [linkInput, setLinkInput] = useState<string>("");
+  const [linkInput, setLinkInput] = useState<string>(
+    pageData.links.find(
+      (e) => e?.id == pageData.builders.find((el) => el.id == id)?.linkId
+    )?.linkHref ?? ""
+  );
   const [linkInputError, setLinkInputError] = useState<string>("");
 
   // Handle Builder selected item change
@@ -112,38 +116,33 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       return isValidLink;
     };
 
-    const newLinks = pageData.links;
+    const newBuilders = pageData.builders;
     const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
-    const linkIndex = newLinks.findIndex((e) => e?.id == builderId);
+    const builderIndex = newBuilders.findIndex((e) => e.linkId == builderId);
 
     if (!e.target.value) {
       setLinkInputError(LinkInputErrors.EMPTY_URL);
 
-      newLinks[linkIndex] = {
-        ...newLinks[linkIndex],
-        linkHref: "",
-      };
+      newBuilders[builderIndex] = { ...newBuilders[builderIndex], input: "" };
 
-      setPageData({ ...pageData, links: newLinks });
+      // setPageData({ ...pageData, links: newLinks, builders: newBuilders });
+      setPageData({ ...pageData, builders: newBuilders });
     } else if (!isUrlValid()) {
       setLinkInputError(LinkInputErrors.WRONG_URL_PATTERN);
 
-      newLinks[linkIndex] = {
-        ...newLinks[linkIndex],
-        linkHref: "",
-      };
+      newBuilders[builderIndex] = { ...newBuilders[builderIndex], input: "" };
 
-      setPageData({ ...pageData, links: newLinks });
+      setPageData({ ...pageData, builders: newBuilders });
     } else {
       setLinkInputError("");
 
       // Active and Desactivate links
-      newLinks[linkIndex] = {
-        ...newLinks[linkIndex],
-        linkHref: e.target.value.replace("https://", ""),
+      newBuilders[builderIndex] = {
+        ...newBuilders[builderIndex],
+        input: e.target.value.replace("https://", ""),
       };
 
-      setPageData({ ...pageData, links: newLinks });
+      setPageData({ ...pageData, builders: newBuilders });
     }
   };
 

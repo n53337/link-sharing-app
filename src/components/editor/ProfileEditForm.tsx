@@ -1,6 +1,5 @@
 import { EditorContext } from "@/contexts/EditorContextProvider";
-import { isEmailValid } from "@/helpers";
-import { isUsernameValid, isUsernameValid } from "@/services/app";
+import { isUsernameValid } from "@/services/app";
 import Input from "@/ui/Input";
 import { useContext, useEffect, useState } from "react";
 
@@ -9,7 +8,7 @@ function ProfileEditForm() {
 
   const [firstName, setFirstName] = useState(pageData.firstName ?? "");
   const [lastName, setLastName] = useState(pageData.lastName ?? "");
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(pageData.username ?? "");
   const [email, setEmail] = useState(pageData.email ?? "");
   const [usernameValidation, setUsernameValidation] = useState({
     error: false,
@@ -50,6 +49,8 @@ function ProfileEditForm() {
           type: "success",
           message: `${usr} is valid`,
         });
+
+        setPageData({ ...pageData, username: usr });
       } else {
         setUsernameValidation({
           error: true,
