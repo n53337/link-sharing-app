@@ -7,19 +7,22 @@ import { SortableProps } from "./SortableLinkBuilder";
 import { EditorContext } from "@/contexts/EditorContextProvider";
 import { BRAND_NAME } from "@/helpers/constants";
 import { LinkInputErrors } from "@/helpers/linkInputErrors";
+import { isUrlValid } from "@/helpers";
 
 interface LinkBuilderProps extends SortableProps {}
 
 function LinkBuilder({ id, index }: LinkBuilderProps) {
   const { pageData, setPageData } = useContext(EditorContext);
 
-  const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(null);
-
-  const [linkInput, setLinkInput] = useState<string>(
-    pageData.links.find(
-      (e) => e?.id == pageData.builders.find((el) => el.id == id)?.linkId
-    )?.linkHref ?? ""
+  const [selectedItem, setSelectedItem] = useState<DropDownItems | null>(
+    LinksMenuListGrey.find(
+      (e) => e.id == pageData.builders.find((e) => e.id == id)?.linkId
+    ) ?? null
   );
+
+  const hey = pageData.builders.find((e) => e.id == id)?.input;
+
+  const [linkInput, setLinkInput] = useState<string>(hey ?? "");
   const [linkInputError, setLinkInputError] = useState<string>("");
 
   // Handle Builder selected item change
@@ -49,8 +52,18 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
       links: newLinksList,
     });
 
+    const urlPlaceHolder =
+      LinksMenuList.find((e) => e.id == selectedItem?.id)?.inputPlaceHolder ??
+      "";
+
     // reset link input
-    setLinkInput("");
+    if (!isUrlValid(urlPlaceHolder, linkInput)) {
+      const newBuilders = pageData.builders;
+      const inputIndex = newBuilders.findIndex((e) => e.id == id);
+      newBuilders[inputIndex] = { ...newBuilders[inputIndex], input: "" };
+      // setPageData({ ...pageData, builders: newBuilders });
+      setLinkInput("");
+    }
   }, [selectedItem]);
 
   // Remove builder
@@ -85,36 +98,9 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
   const handleLinkInput = (e: any) => {
     setLinkInput(e.target.value);
 
-    const urlPlaceHolder = LinksMenuList.find(
-      (e) => e.id == selectedItem?.id
-    )?.inputPlaceHolder;
-
-    const isUrlValid = (): boolean => {
-      const pattern = new RegExp(
-        `^${urlPlaceHolder
-          ?.replace("/username", "")
-          .replace(/\//g, "\\/")}\/[^*]`
-      );
-      const cleanLinkPattern = new RegExp(
-        `^${urlPlaceHolder
-          ?.replace("/username", "")
-          .replace("https://www.", "")
-          .replace(/\//g, "\\/")}\/[^*]`
-      );
-      const noWwwPattern = new RegExp(
-        `^${urlPlaceHolder
-          ?.replace("/username", "")
-          .replace("www.", "")
-          .replace(/\//g, "\\/")}\/[^*]`
-      );
-
-      const isValidLink =
-        pattern.test(e.target.value) ||
-        cleanLinkPattern.test(e.target.value) ||
-        noWwwPattern.test(e.target.value);
-
-      return isValidLink;
-    };
+    const urlPlaceHolder =
+      LinksMenuList.find((e) => e.id == selectedItem?.id)?.inputPlaceHolder ??
+      "";
 
     const newBuilders = pageData.builders;
     const builderId = pageData.builders.find((e) => e.id == id)?.linkId;
@@ -122,12 +108,10 @@ function LinkBuilder({ id, index }: LinkBuilderProps) {
 
     if (!e.target.value) {
       setLinkInputError(LinkInputErrors.EMPTY_URL);
-
       newBuilders[builderIndex] = { ...newBuilders[builderIndex], input: "" };
 
-      // setPageData({ ...pageData, links: newLinks, builders: newBuilders });
       setPageData({ ...pageData, builders: newBuilders });
-    } else if (!isUrlValid()) {
+    } else if (!isUrlValid(urlPlaceHolder, e.target.value)) {
       setLinkInputError(LinkInputErrors.WRONG_URL_PATTERN);
 
       newBuilders[builderIndex] = { ...newBuilders[builderIndex], input: "" };

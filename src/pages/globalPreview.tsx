@@ -1,10 +1,10 @@
 import PreviewCard from "@/components/preview/PreviewCard";
 import PreviewHeader from "@/components/preview/PreviewHeader";
-import { useLocation } from "react-router";
+import { useParams } from "react-router";
 
-function Preview() {
-  const { state } = useLocation();
-  // console.log(state.pageData);
+function GlobalPreview() {
+  const { username } = useParams();
+  console.log("username", username);
 
   return (
     <main className="relative w-screen h-screen max-h-screen md:bg-grey-light">
@@ -17,4 +17,4 @@ function Preview() {
   );
 }
 
-export default Preview;
+export default GlobalPreview;

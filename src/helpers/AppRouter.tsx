@@ -8,6 +8,7 @@ import Preview from "@/pages/preview";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "@/services/firebase";
 import { AppSpinner } from "@/ui/AppSpinner";
+import GlobalPreview from "@/pages/globalPreview";
 
 interface CustomRouteProps {
   isAuthenticated: boolean;
@@ -79,12 +80,25 @@ function AppRouter() {
           />
 
           <Route
-            path="/preview/:username"
+            path="/preview"
+            element={
+              <CustomRoute
+                isAuthenticated={auth}
+                redirect="/login"
+                component={<Preview />}
+              />
+            }
+          />
+
+          {/* PUBLIC PROFILE PAGE */}
+
+          <Route
+            path="/:username"
             element={
               <CustomRoute
                 isAuthenticated={true}
-                redirect="/login"
-                component={<Preview />}
+                redirect="/"
+                component={<GlobalPreview />}
               />
             }
           />

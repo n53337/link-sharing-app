@@ -2,11 +2,10 @@ import { BRAND_NAME } from "@/helpers/constants";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
-import { DoubleCheck, Link, ProfileCircle } from "iconoir-react";
+import { Link, User } from "iconoir-react";
 import CustomizeSection from "../editor/CustomizeSection";
 import MobileMockup from "../editor/MobileMockup";
 import { AppSpinner } from "@/ui/AppSpinner";
-import Notification from "../shared/Notification";
 import EditorContextProvider from "@/contexts/EditorContextProvider";
 
 function Editor() {
@@ -26,21 +25,21 @@ function Editor() {
     },
     {
       id: 2,
-      icon: <ProfileCircle strokeWidth={2} />,
+      icon: <User strokeWidth={2} />,
       item: "Profile Details",
       onClick: () => setActiveTab(2),
     },
   ];
 
   return (
-    <main className="bg-grey-light h-screen">
-      <Navbar
-        tabsItems={tabItems}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
+    <EditorContextProvider>
+      <main className="bg-grey-light h-screen">
+        <Navbar
+          tabsItems={tabItems}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
 
-      <EditorContextProvider>
         <div className="flex gap-4">
           <div className="hidden lg:flex">
             <MobileMockup />
@@ -49,10 +48,10 @@ function Editor() {
             <CustomizeSection activeTab={activeTab} />
           </div>
         </div>
-      </EditorContextProvider>
 
-      <AppSpinner loading={false} />
-    </main>
+        <AppSpinner loading={false} />
+      </main>
+    </EditorContextProvider>
   );
 }
 

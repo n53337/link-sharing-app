@@ -20,7 +20,8 @@ function LinkBuilderArea() {
   const { pageData, setPageData } = useContext(EditorContext);
   const { builders } = pageData;
 
-  // const [links, setLinks] = useState([1, 2]);
+  // TODO: Losing Links data when navigating through tabs
+  // TODO: Preview feature
 
   const newLinkRef = useRef(null);
 

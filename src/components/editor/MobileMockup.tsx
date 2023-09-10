@@ -1,16 +1,12 @@
 import { EditorContext } from "@/contexts/EditorContextProvider";
 import { useContext, useEffect, useRef } from "react";
 import LinksPreviewList from "../shared/LinksPreviewList";
-import LinksMenuList from "../shared/LinksMenuList";
 
 function MobileMockup() {
   const { pageData } = useContext(EditorContext);
   const { avatar, email, firstName, lastName, links, builders } = pageData;
 
   const newLinkRef = useRef(null);
-
-  console.log("MOBILE", pageData.links);
-  console.log("BUILD", pageData.builders);
 
   useEffect(() => {
     if (newLinkRef.current) {
@@ -89,7 +85,6 @@ function MobileMockup() {
                 {links.length
                   ? links.map((item, index) => (
                       <div className="w-60 h-12" key={index}>
-                        <p>{item.input}</p>
                         <LinksPreviewList
                           item={item}
                           to={builders.find((e) => e.linkId == item?.id)?.input}
