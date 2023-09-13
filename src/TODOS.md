@@ -19,3 +19,4 @@
 [todo] fix d&d drag bugs
 [todo] disable buttons until links is saved
 [todo] profile image preview placeholder
+[doing] preview feature

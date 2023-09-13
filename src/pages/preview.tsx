@@ -4,6 +4,8 @@ import { useLocation } from "react-router";
 
 function Preview() {
   const { state } = useLocation();
+  console.log(JSON.parse(state));
+
   // console.log(state.pageData);
 
   return (

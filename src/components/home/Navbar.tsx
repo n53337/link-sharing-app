@@ -6,6 +6,7 @@ import { EyeEmpty } from "iconoir-react";
 import { useContext } from "react";
 import { EditorContext } from "@/contexts/EditorContextProvider";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
   tabsItems: Array<TabsItems>;
@@ -16,6 +17,7 @@ interface NavbarProps {
 function Navbar({ tabsItems, selectedItem, setSelectedItem }: NavbarProps) {
   const { pageData } = useContext(EditorContext);
   const navigator = useNavigate();
+  console.log("HH", pageData);
 
   return (
     <header className="w-full fixed z-20 px-6 py-4 bg-white flex justify-between items-center shadow-drop-down">
@@ -31,7 +33,9 @@ function Navbar({ tabsItems, selectedItem, setSelectedItem }: NavbarProps) {
 
       <span
         className="md:hidden"
-        onClick={() => navigator("/preview", { state: pageData })}
+        onClick={() =>
+          navigator("preview", { state: JSON.stringify(pageData) })
+        }
       >
         <Button variant="secondary" size="sm">
           <EyeEmpty strokeWidth={2} />
@@ -40,7 +44,9 @@ function Navbar({ tabsItems, selectedItem, setSelectedItem }: NavbarProps) {
 
       <span
         className="hidden md:flex"
-        onClick={() => navigator("/preview", { state: pageData })}
+        onClick={() =>
+          navigator("preview", { state: JSON.stringify(pageData) })
+        }
       >
         <Button variant="secondary" size="sm">
           Preview
