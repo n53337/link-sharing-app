@@ -1,5 +1,5 @@
 import { BRAND_NAME } from "@/helpers/constants";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
 import { Link, User } from "iconoir-react";
@@ -33,14 +33,14 @@ function Editor() {
 
   return (
     <EditorContextProvider>
-      <main className="bg-grey-light h-screen">
+      <main className="bg-grey-light h-screen ">
         <Navbar
           tabsItems={tabItems}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
         />
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 max-w-[1920px] mx-auto">
           <div className="hidden lg:flex">
             <MobileMockup />
           </div>

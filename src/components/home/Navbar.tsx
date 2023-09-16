@@ -17,7 +17,6 @@ interface NavbarProps {
 function Navbar({ tabsItems, selectedItem, setSelectedItem }: NavbarProps) {
   const { pageData } = useContext(EditorContext);
   const navigator = useNavigate();
-  console.log("HH", pageData);
 
   return (
     <header className="w-full fixed z-20 px-6 py-4 bg-white flex justify-between items-center shadow-drop-down">
