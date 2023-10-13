@@ -1,12 +1,12 @@
 import { BRAND_NAME } from "@/helpers/constants";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
-import { DoubleCheck, Link, ProfileCircle } from "iconoir-react";
+import { Link, User } from "iconoir-react";
 import CustomizeSection from "../editor/CustomizeSection";
 import MobileMockup from "../editor/MobileMockup";
 import { AppSpinner } from "@/ui/AppSpinner";
-import Notification from "../shared/Notification";
+import EditorContextProvider from "@/contexts/EditorContextProvider";
 
 function Editor() {
   useEffect(() => {
@@ -14,44 +14,44 @@ function Editor() {
   }, []);
 
   const [selectedItem, setSelectedItem] = useState(1);
+  const [activeTab, setActiveTab] = useState(1);
 
   const tabItems: Array<TabsItems> = [
     {
       id: 1,
       icon: <Link strokeWidth={2} />,
       item: "Links",
+      onClick: () => setActiveTab(1),
     },
     {
       id: 2,
-      icon: <ProfileCircle strokeWidth={2} />,
+      icon: <User strokeWidth={2} />,
       item: "Profile Details",
+      onClick: () => setActiveTab(2),
     },
   ];
 
   return (
-    <main className="bg-grey-light h-screen">
-      <Navbar
-        tabsItems={tabItems}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
+    <EditorContextProvider>
+      <main className="bg-grey-light h-screen ">
+        <Navbar
+          tabsItems={tabItems}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
 
-      <div className="flex gap-4">
-        <div className="hidden lg:flex">
-          <MobileMockup />
+        <div className="flex gap-4 max-w-[1920px] mx-auto">
+          <div className="hidden lg:flex">
+            <MobileMockup />
+          </div>
+          <div className="flex-1">
+            <CustomizeSection activeTab={activeTab} />
+          </div>
         </div>
-        <div className="flex-1">
-          <CustomizeSection />
-        </div>
-      </div>
-      <AppSpinner loading={false} />
-      <Notification
-        onClose={() => {}}
-        message="You have logged in successfully!"
-        type="success"
-        icon={<DoubleCheck />}
-      />
-    </main>
+
+        <AppSpinner loading={false} />
+      </main>
+    </EditorContextProvider>
   );
 }
 

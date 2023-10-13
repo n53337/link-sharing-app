@@ -1,4 +1,19 @@
+import { EditorContext } from "@/contexts/EditorContextProvider";
+import { useContext, useEffect, useRef } from "react";
+import LinksPreviewList from "../shared/LinksPreviewList";
+
 function MobileMockup() {
+  const { pageData } = useContext(EditorContext);
+  const { avatar, email, firstName, lastName, links, builders } = pageData;
+
+  const newLinkRef = useRef(null);
+
+  useEffect(() => {
+    if (newLinkRef.current) {
+      newLinkRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [pageData]);
+
   return (
     <section className="h-full pt-20">
       <div className="p-4 h-full">
@@ -31,18 +46,71 @@ function MobileMockup() {
               />
             </svg>
             <div className="absolute top-0 w-full flex flex-col items-center gap-10 px-6 py-12">
-              <div className="flex flex-col items-center justify-center gap-8">
-                <div className="rounded-full bg-grey-placeholder w-28 h-28"></div>
-                <div className="flex flex-col items-center justify-center gap-3">
-                  <div className="rounded-full bg-grey-placeholder w-40 h-4"></div>
-                  <div className="rounded-full bg-grey-placeholder w-20 h-2"></div>
+              <div className="flex flex-col items-center justify-center gap-5">
+                <div
+                  className={`rounded-full bg-grey-placeholder w-28 h-28 border-purple overflow-hidden ${
+                    avatar ? "border-2" : ""
+                  }`}
+                >
+                  {avatar ? (
+                    <img
+                      className="w-full h-full object-cover"
+                      src={avatar}
+                      alt={firstName ?? "avatar"}
+                    />
+                  ) : null}
+                </div>
+
+                <div
+                  className={`flex flex-col items-center justify-center ${
+                    (firstName || lastName) && email ? "" : "gap-4"
+                  }`}
+                >
+                  {firstName || lastName ? (
+                    <p className="text-grey font-semibold text-lg">
+                      {firstName + " " + lastName}
+                    </p>
+                  ) : (
+                    <div className="rounded-full bg-grey-placeholder w-40 h-4"></div>
+                  )}
+                  {email ? (
+                    <p className="text-grey-50 text-sm">{email}</p>
+                  ) : (
+                    <div className="rounded-full bg-grey-placeholder w-20 h-2"></div>
+                  )}
                 </div>
               </div>
-              <div className="flex flex-col gap-6">
+
+              <div className="flex flex-col gap-6 max-h-72 overflow-auto">
+                {links.length
+                  ? links.map((item, index) => (
+                      <div className="w-60 h-12" key={index}>
+                        <LinksPreviewList
+                          item={item}
+                          to={builders.find((e) => e.linkId == item?.id)?.input}
+                        />
+                      </div>
+                    ))
+                  : Array.from({ length: 4 }, (v, i) => i).map((item) => (
+                      <div
+                        key={item}
+                        className="w-60 h-12 bg-grey-placeholder rounded-lg"
+                      ></div>
+                    ))}
+                {links.length ? (
+                  <div
+                    className="w-60 h-12"
+                    ref={(el) => {
+                      // Auto Scroll
+                      if (links.length == 4 && el) {
+                        newLinkRef.current = el;
+                      }
+                    }}
+                  ></div>
+                ) : null}
+                {/* <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
                 <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
-                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
-                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
-                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div>
+                <div className="w-60 h-12 bg-grey-placeholder rounded-lg"></div> */}
               </div>
             </div>
           </div>

@@ -1,14 +1,18 @@
 import Button from "@/ui/Button";
 import { ArrowEmailForward, ShareAndroid } from "iconoir-react";
 
-function PreviewHeader() {
+interface PreviewHeaderProps {
+  onBack: () => void;
+}
+
+function PreviewHeader({ onBack }: PreviewHeaderProps) {
   return (
     <header className="w-full">
       <div className="flex justify-between items-center bg-white rounded-lg p-4">
         {/* Desktop Navbar */}
 
         <span className="hidden md:block">
-          <Button variant="secondary" size="base">
+          <Button variant="secondary" size="base" onClick={onBack}>
             Back to Editor
           </Button>
         </span>
@@ -21,7 +25,7 @@ function PreviewHeader() {
         {/* Mobile Navbar */}
 
         <span className="md:hidden">
-          <Button variant="secondary" size="base">
+          <Button variant="secondary" size="base" onClick={onBack}>
             <ArrowEmailForward
               width={22}
               height={22}

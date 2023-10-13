@@ -3,10 +3,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import LinkBuilder from "./LinkBuilder";
 
-interface SortableProps {
+export interface SortableProps {
   id: UniqueIdentifier;
+  index: number;
 }
-function SortableLinkBuilder({ id }: SortableProps) {
+function SortableLinkBuilder({ id, index }: SortableProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -17,7 +18,7 @@ function SortableLinkBuilder({ id }: SortableProps) {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <LinkBuilder id={id} />
+      <LinkBuilder id={id} index={index} />
     </div>
   );
 }

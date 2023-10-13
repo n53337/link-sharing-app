@@ -1,18 +1,26 @@
 import { DeleteCircle } from "iconoir-react";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
-interface NotificationProps {
-  message: String;
-  onClose: () => void;
+export interface NotificationProps {
+  message: string;
+  onClose?: () => void;
   type: "success" | "error";
   icon?: ReactElement;
+  isVisible: boolean;
 }
-function Notification({ message, onClose, type, icon }: NotificationProps) {
-  const [isVisible, setIsVisible] = useState(true);
+function Notification({
+  message,
+  onClose,
+  type,
+  icon,
+  isVisible,
+}: NotificationProps) {
+  // const [isVisible, setIsVisible] = useState(true);
 
   const closeNotification = () => {
-    setIsVisible(false);
-    onClose();
+    if (onClose) {
+      onClose();
+    }
   };
 
   return (

@@ -10,27 +10,70 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import SortableLinkBuilder from "./SortableLinkBuilder";
+import { EditorContext } from "@/contexts/EditorContextProvider";
+import { DropDownItems } from "@/ui/DropDown";
+import LinksMenuList from "../shared/LinksMenuList";
 
 function LinkBuilderArea() {
-  const [items, setItems] = useState([1]);
+  const { pageData, setPageData } = useContext(EditorContext);
+  const { builders } = pageData;
+
+  // TODO: Losing Links data when navigating through tabs
+  // TODO: Preview feature
+
+  const newLinkRef = useRef(null);
+
+  useEffect(() => {
+    if (newLinkRef.current) {
+      newLinkRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [pageData]);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
 
     if (active.id !== over.id) {
-      setItems((items) => {
-        const activeIndex = items.indexOf(active.id);
-        const overIndex = items.indexOf(over.id);
-        return arrayMove(items, activeIndex, overIndex);
+      setPageData((pageData) => {
+        const activeIndex = pageData.builders.findIndex(
+          (item) => item.id == active.id
+        );
+
+        const overIndex = pageData.builders.findIndex(
+          (item) => item.id == over.id
+        );
+
+        const newBuilders = arrayMove(
+          pageData.builders,
+          activeIndex,
+          overIndex
+        );
+
+        const newLinks = newBuilders.map((builder) =>
+          LinksMenuList.find((link) => link.id == builder.linkId)
+        );
+
+        const newLinksList: Array<DropDownItems | undefined> = [];
+        for (let i = 0; i < newLinks.length; i++) {
+          if (newLinks[i]) {
+            newLinksList.push(newLinks[i]);
+          }
+        }
+
+        const newPageData = {
+          ...pageData,
+          builders: newBuilders,
+          links: newLinksList,
+        };
+        return newPageData;
       });
     }
   };
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { delay: 150, tolerance: 100 },
+      activationConstraint: { delay: 140, tolerance: 10 },
     })
   );
 
@@ -41,10 +84,13 @@ function LinkBuilderArea() {
       sensors={sensors}
     >
       <div className="flex flex-col gap-4">
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <SortableContext
+          items={builders}
+          strategy={verticalListSortingStrategy}
+        >
           {/* We need components that use the useSortable hook */}
-          {items.map((item) => (
-            <SortableLinkBuilder key={item} id={item} />
+          {builders.map((item, index) => (
+            <SortableLinkBuilder key={item.id} index={index + 1} id={item.id} />
           ))}
         </SortableContext>
       </div>
