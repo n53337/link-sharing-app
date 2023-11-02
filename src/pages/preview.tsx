@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router";
 function Preview() {
   const { state } = useLocation();
   const navigator = useNavigate();
-  // console.log(JSON.parse(state));
 
   const onBack = () => {
     navigator("/", { state });

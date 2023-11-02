@@ -16,6 +16,8 @@ function ProfileEditForm() {
     message: "",
   });
 
+  console.log("PAGE DATA", pageData);
+
   useEffect(() => {
     setPageData({
       ...pageData,
