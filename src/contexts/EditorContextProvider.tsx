@@ -31,7 +31,7 @@ const defaultPageData: PageData = {
   builders: [],
 };
 
-export const EditorContext = createContext<EditorContextGen>(null);
+export const EditorContext = createContext<EditorContextGen | any>(null);
 
 function EditorContextProvider({ ...props }) {
   const [pageData, setPageData] = useState<PageData>(defaultPageData);

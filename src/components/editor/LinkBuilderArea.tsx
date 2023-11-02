@@ -23,7 +23,7 @@ function LinkBuilderArea() {
   // TODO: Losing Links data when navigating through tabs
   // TODO: Preview feature
 
-  const newLinkRef = useRef(null);
+  const newLinkRef: any = useRef(null);
 
   useEffect(() => {
     if (newLinkRef.current) {
@@ -50,7 +50,7 @@ function LinkBuilderArea() {
           overIndex
         );
 
-        const newLinks = newBuilders.map((builder) =>
+        const newLinks = newBuilders.map((builder: any) =>
           LinksMenuList.find((link) => link.id == builder.linkId)
         );
 

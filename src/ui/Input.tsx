@@ -5,7 +5,7 @@ import { ComponentProps, ReactElement } from "react";
 interface InputProps extends ComponentProps<"input"> {
   error?: boolean;
   errorMessage?: string;
-  errorType?: "warning" | "success";
+  errorType?: "warning" | "success" | string;
   icon?: ReactElement;
 }
 

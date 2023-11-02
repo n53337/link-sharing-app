@@ -1,5 +1,5 @@
 import { BRAND_NAME } from "@/helpers/constants";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/home/Navbar";
 import { TabsItems } from "@/ui/Tabs";
 import { Link, User } from "iconoir-react";
