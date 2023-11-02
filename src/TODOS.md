@@ -20,3 +20,7 @@
 [todo] disable buttons until links is saved
 [todo] profile image preview placeholder
 [doing] preview feature
+
+<!-- BUGS -->
+
+[] state between pages
