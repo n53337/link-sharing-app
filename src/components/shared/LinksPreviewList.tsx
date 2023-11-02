@@ -3,7 +3,7 @@ import { ArrowRight } from "iconoir-react";
 import { ComponentProps } from "react";
 
 interface LinksPreviewListProps extends ComponentProps<"a"> {
-  item: DropDownItems;
+  item: DropDownItems | undefined;
   to: string | undefined;
 }
 
@@ -16,17 +16,17 @@ const LinksPreviewList = ({ item, to }: LinksPreviewListProps) => {
         !to ? "opacity-50 cursor-not-allowed" : ""
       }`}
       style={{
-        backgroundColor: `${item.bgColor}`,
-        borderColor: item.border ? `${item.border}` : "none",
+        backgroundColor: `${item?.bgColor}`,
+        borderColor: item?.border ? `${item?.border}` : "none",
       }}
       target={to ? "_blank" : "_parent"}
       rel="noopener noreferrer"
     >
       <span className="flex items-center gap-3">
-        {item.icon}
-        <p className={`${item.arrowColor ?? "text-white"}`}>{item.item}</p>
+        {item?.icon}
+        <p className={`${item?.arrowColor ?? "text-white"}`}>{item?.item}</p>
       </span>
-      <ArrowRight color={`${item.arrowColor ?? "#ffffff"}`} strokeWidth={2} />
+      <ArrowRight color={`${item?.arrowColor ?? "#ffffff"}`} strokeWidth={2} />
     </a>
   );
 };

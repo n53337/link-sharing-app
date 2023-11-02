@@ -6,7 +6,7 @@ function MobileMockup() {
   const { pageData } = useContext(EditorContext);
   const { avatar, email, firstName, lastName, links, builders } = pageData;
 
-  const newLinkRef = useRef(null);
+  const newLinkRef: any = useRef(null);
 
   useEffect(() => {
     if (newLinkRef.current) {
@@ -91,7 +91,7 @@ function MobileMockup() {
                         />
                       </div>
                     ))
-                  : Array.from({ length: 4 }, (v, i) => i).map((item) => (
+                  : Array.from({ length: 4 }, (_, i) => i).map((item) => (
                       <div
                         key={item}
                         className="w-60 h-12 bg-grey-placeholder rounded-lg"

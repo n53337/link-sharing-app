@@ -1,6 +1,5 @@
 import { isEmailValid } from "@/helpers";
 import { AuthErrors, AuthErrorsTypes } from "@/services/auth/authErrors";
-import { login } from "@/services/auth/login";
 import { AppSpinner } from "@/ui/AppSpinner";
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";

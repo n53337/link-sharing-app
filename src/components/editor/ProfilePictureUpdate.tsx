@@ -19,7 +19,7 @@ function ProfilePictureUpdate() {
         setErrorMessage("Image size must be below 1MB.");
       } else {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = (e: any) => {
           setSelectedImage(e.target.result);
           setPageData({ ...pageData, avatar: e.target?.result });
         };
